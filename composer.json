@@ -1,0 +1,27 @@
+{
+	"name": "message/mothership-install",
+	"description": "Installation tool for setting up new Mothership sites",
+	"keywords": ["mothership", "installer", "install", "cog"],
+	"homepage": "http://message.co.uk",
+	"license": "proprietary",
+	"authors": [
+		{
+			"name" : "The Message Development Team",
+			"email": "dev@message.co.uk"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/messagedigital/mothership-install/issues"
+	},
+	"autoload": {
+		"psr-4": {
+			"Message\\Mothership\\Install\\"      : "src",
+			"Message\\Mothership\\Install\\Test\\": "tests"
+		}
+	},
+	"require": {
+		"php": ">=5.4.0"
+	},
+	"suggest": {
+	}
+}
