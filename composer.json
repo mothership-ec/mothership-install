@@ -15,12 +15,16 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Message\\Mothership\\Install\\"      : "src",
+			"Message\\Mothership\\Install\\"      : "installer/src",
 			"Message\\Mothership\\Install\\Test\\": "tests"
 		}
 	},
+	"config": {
+		"vendor-dir": "installer/vendor"
+	},
 	"require": {
-		"php": ">=5.4.0"
+		"php": ">=5.4.0",
+		"kevinlebrun/colors.php": "0.*"
 	},
 	"suggest": {
 	}
