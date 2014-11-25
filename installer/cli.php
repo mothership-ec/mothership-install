@@ -2,6 +2,7 @@
 
 use Message\Mothership\Install\Exception\InvalidCommandException;
 use Message\Mothership\Install\Command\Commands;
+use Message\Mothership\Install\Command\OptionParser;
 use Message\Mothership\Install\Project\Types;
 use Message\Mothership\Install\Output;
 
@@ -14,20 +15,19 @@ use Message\Mothership\Install\Output;
 try {
 	require_once(__DIR__ . '/autoloader.php');
 
-	$pharPath = $argv[0];
-	$command  = array_key_exists(1, $argv) ? $argv[1] : Commands::INSTALL;
-	$type     = array_key_exists(2, $argv) ? $argv[2] : Types::ECOMMERCE;
+	$optionParser = new OptionParser($argv);
+	$options = $optionParser->getParsedOptions();
 
-	switch ($command) {
+	switch ($options[OptionParser::COMMAND]) {
 		case Commands::INSTALL :
 
 			break;
 		default :
-			throw new InvalidCommandException('`' . $command . '` is not a valid command');
+			throw new InvalidCommandException('`' . $options[OptionParser::COMMAND] . '` is not a valid command');
 	}
 } catch (\Exception $e) {
 	$output = new Output\ExceptionOutput($e);
-	$debugMode = (array_key_exists(3, $argv) && $argv[3] === Commands::DEBUG);
+	$debugMode = (isset($options) && array_key_exists('debug', $options) && $options['debug'] === 'true');
 
 	if ($debugMode) {
 		$output->outputDebug();

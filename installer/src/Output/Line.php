@@ -3,6 +3,7 @@
 namespace Message\Mothership\Install\Output;
 
 use Colors\Color;
+use Colors\NoStyleFoundException;
 
 /**
  * Class Line
@@ -44,8 +45,10 @@ class Line
 			}
 
 			return (string) $c;
+		} catch (NoStyleFoundException $e) {
+			return $this->_text;
 		} catch (\Exception $e) {
-			return $e->getMessage();
+			return get_class($e) . ' thrown!: ' . $e->getMessage();
 		}
 	}
 
