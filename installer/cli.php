@@ -5,7 +5,7 @@ use Message\Mothership\Install\Command\Commands;
 use Message\Mothership\Install\Command\OptionParser;
 use Message\Mothership\Install\Project\Types;
 use Message\Mothership\Install\Output;
-use Message\Mothership\Install\FileSystem\DirectoryResolver;
+use Message\Mothership\Install\Project\Installer\Collection as InstallCollection;
 
 /**
  * Main script for setting up a Mothership installation
@@ -22,9 +22,8 @@ try {
 
 	switch ($options[OptionParser::COMMAND]) {
 		case Commands::INSTALL :
-				$dirResolver = new DirectoryResolver;
-				$dirResolver->create('../test');
-				exec('git clone git@github.com:messagedigital/mothership-skeleton-theme.git ' . $dirResolver->getAbsolute('../test'));
+			$installCollection = new InstallCollection;
+			$installCollection->get($options[OptionParser::TYPE])->install($options);
 
 			break;
 		default :
@@ -32,7 +31,7 @@ try {
 	}
 } catch (\Exception $e) {
 	$output = new Output\ExceptionOutput($e);
-	$debugMode = (isset($options) && array_key_exists('debug', $options) && $options['debug'] === 'true');
+	$debugMode = (isset($options) && !empty($options['debug']));
 
 	if ($debugMode) {
 		$output->outputDebug();

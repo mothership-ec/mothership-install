@@ -3,7 +3,7 @@
 namespace Message\Mothership\Install\Project\Installer;
 
 use Message\Mothership\Install\Project\Types;
-use Message\Mothership\Install\Project\Composer;
+use Message\Mothership\Install\Project\RootFile\Composer\EcommerceComposer;
 
 class EcommerceInstaller extends AbstractInstaller
 {
@@ -19,6 +19,6 @@ class EcommerceInstaller extends AbstractInstaller
 
 	public function getComposerTemplate()
 	{
-		return new Composer\EcommerceTemplate;
+		return new \Message\Mothership\Install\Project\RootFile\Composer\EcomComposer;
 	}
 }

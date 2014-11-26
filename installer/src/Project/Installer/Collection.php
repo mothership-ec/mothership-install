@@ -2,8 +2,6 @@
 
 namespace Message\Mothership\Install\Project\Installer;
 
-use Message\Mothership\Install\Project\Exception;
-
 class Collection extends \ArrayObject
 {
 	public function __construct()
@@ -12,6 +10,8 @@ class Collection extends \ArrayObject
 			'ecom'      => new EcomInstaller,
 			'ecommerce' => new EcommerceInstaller,
 		];
+
+		parent::__construct($installers);
 	}
 
 	public function get($name)

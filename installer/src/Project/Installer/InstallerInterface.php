@@ -7,5 +7,5 @@ interface InstallerInterface
 	public function getName();
 	public function getTheme();
 	public function getComposerTemplate();
-	public function install();
+	public function install(array $options);
 }

@@ -9,6 +9,9 @@ class OptionParser
 	const PHAR_PATH = 'phar_path';
 	const COMMAND   = 'command';
 	const TYPE      = 'type';
+	const PATH      = 'path';
+	const FORCE     = 'force';
+	const COMPOSER  = 'composer';
 
 	private $_args;
 	private $_parsedOptions = [];
@@ -36,7 +39,7 @@ class OptionParser
 		if (!array_key_exists(0, $this->_args)) {
 			throw new \LogicException('Option for phar path not set on args');
 		}
-		if (!preg_match('/.+\.phar$/', $this->_args[0])) {
+		if (!preg_match('/.+\.ph(ar|p)$/', $this->_args[0])) {
 			throw new \LogicException('Phar path `' . $this->_args[0] . '`is invalid');
 		}
 	}
@@ -47,9 +50,19 @@ class OptionParser
 		unset($this->_args[0]);
 
 		foreach ($this->_args as $key => $arg) {
-			if (preg_match('/^\-\-[A-Za-z]+\=.+/', $arg)) {
-				list($newKey, $val) = explode('=', $arg);
+			if (preg_match('/^\-\-[A-Za-z]+.+/', $arg)) {
+				$option = explode('=', $arg);
+				if (count($option) > 1) {
+					list($newKey, $val) = $option;
+				} else {
+					$newKey = array_shift($option);
+					$val = true;
+				}
 				$newKey = str_replace('--', '', $newKey);
+				if (!$newKey) {
+					continue;
+				}
+				$val = (is_string($val)) ? trim($val, '\'"') : $val;
 				$this->_parsedOptions[$newKey] = $val;
 				unset($this->_args[$key]);
 			}

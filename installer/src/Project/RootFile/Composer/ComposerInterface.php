@@ -1,6 +1,6 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Composer;
+namespace Message\Mothership\Install\Project\RootFile\Composer;
 
 interface ComposerInterface
 {

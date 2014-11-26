@@ -1,6 +1,6 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Composer;
+namespace Message\Mothership\Install\Project\RootFile\Composer;
 
 use Message\Mothership\Install\Project\Types;
 

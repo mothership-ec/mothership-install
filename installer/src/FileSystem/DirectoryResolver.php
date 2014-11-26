@@ -19,7 +19,7 @@ class DirectoryResolver
 		$force = (bool) $force;
 
 		if ($this->exists($path)) {
-			return new Directory($path, fileperms($path));
+			return new Directory($path, fileperms($this->getAbsolute($path) . '/.'));
 		}
 		if ($force) {
 			return $this->create($path, 0755, true);
@@ -35,14 +35,7 @@ class DirectoryResolver
 		return array_shift($output);
 	}
 
-	public function change($path)
-	{
-		$path = $this->getAbsolute($path);
-
-		exec('cd ' . $path);
-	}
-
-	public function create($path, $permission = 0755, $recursive = true)
+	public function create($path, $permission = 0777, $recursive = true)
 	{
 		if (!is_string($path)) {
 			throw new \InvalidArgumentException('Path must be a string, ' . gettype($path) . ' given');
@@ -62,11 +55,9 @@ class DirectoryResolver
 		return is_dir($this->getAbsolute($path));
 	}
 
-	public function delete($path, $recursive = true)
+	public function delete($path)
 	{
-		$command = 'rm ' . ($recursive ? '-rf ' : '') . $path;
-
-		return $command;
+		exec('rm -rf ' . $path);
 	}
 
 	public function getAbsolute($path)
