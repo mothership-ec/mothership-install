@@ -5,6 +5,7 @@ use Message\Mothership\Install\Command\Commands;
 use Message\Mothership\Install\Command\OptionParser;
 use Message\Mothership\Install\Project\Types;
 use Message\Mothership\Install\Output;
+use Message\Mothership\Install\FileSystem\DirectoryResolver;
 
 /**
  * Main script for setting up a Mothership installation
@@ -13,6 +14,7 @@ use Message\Mothership\Install\Output;
  */
 
 try {
+
 	require_once(__DIR__ . '/autoloader.php');
 
 	$optionParser = new OptionParser($argv);
@@ -20,6 +22,9 @@ try {
 
 	switch ($options[OptionParser::COMMAND]) {
 		case Commands::INSTALL :
+				$dirResolver = new DirectoryResolver;
+				$dirResolver->create('../test');
+				exec('git clone git@github.com:messagedigital/mothership-skeleton-theme.git ' . $dirResolver->getAbsolute('../test'));
 
 			break;
 		default :
