@@ -65,7 +65,7 @@ class ExceptionOutput extends AbstractOutput
 		$compressed = [];
 
 		foreach ($this->_exception->getTrace() as $line) {
-			$compressed[] = implode(':', $line);
+			$compressed[] = is_array($line) ? implode(':', $line) : $line;
 		}
 
 		return $compressed;

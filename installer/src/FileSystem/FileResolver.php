@@ -22,4 +22,12 @@ class FileResolver
 
 		fclose($handle);
 	}
+
+	public function exists($filePath)
+	{
+		$dirResolver = new DirectoryResolver;
+		$filePath = $dirResolver->getAbsolute($filePath);
+
+		return file_exists($filePath);
+	}
 }

@@ -6,7 +6,7 @@ use Message\Mothership\Install\Command\OptionParser;
 use Message\Mothership\Install\FileSystem\DirectoryResolver;
 use Message\Mothership\Install\Output;
 use Message\Mothership\Install\Project\Installer\Collection as InstallCollection;
-use Composer\EventDispatcher;
+use Message\Mothership\Install\Project\Init\Initialiser;
 
 /**
  * Main script for setting up a Mothership installation
@@ -23,14 +23,14 @@ try {
 
 	$dirResolver = new DirectoryResolver;
 	$path = (!empty($options[OptionParser::PATH]) ? $dirResolver->getAbsolute($options[OptionParser::PATH]) : $dirResolver->current());
-	$cogPath = rtrim($path, '/') . '/vendor/message/cog/src';
 
 	switch ($options[OptionParser::COMMAND]) {
 		case Commands::INSTALL :
 			$installCollection = new InstallCollection;
 			$installCollection->get($options[OptionParser::TYPE])->install($options);
 
-//			$initialiser = new Initialiser;
+			$initialiser = new Initialiser;
+			$initialiser->init($path);
 
 			break;
 		default :
