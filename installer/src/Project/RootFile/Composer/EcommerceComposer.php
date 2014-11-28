@@ -32,6 +32,7 @@ class EcommerceComposer extends AbstractComposer
 	},
 	"suggest": {
 		"message/cog-mothership-stripe" : "Allows integration of Stripe payment gateway",
+		"message/cog-mothership-epos"   : "EPOS module for Mothership sites, allow synchronised shop and online sales",
 		"message/cog-mothership-fedex"  : "Allows integration of Fedex dispatch methods",
 		"message/cog-mothership-mailing": "Allows synchronisation with major mailing list providers"
 	},

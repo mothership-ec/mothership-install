@@ -3,6 +3,7 @@
 namespace Message\Mothership\Install\Project\Theme;
 
 use Message\Mothership\Install\FileSystem\DirectoryResolver;
+use Message\Mothership\Install\Command\ShellCommand;
 
 class Downloader
 {
@@ -21,7 +22,7 @@ class Downloader
 			$this->_dirResolver->create($path);
 		}
 
-		exec('git clone ' . $repo . ' ' . $path);
+		ShellCommand::run('git clone ' . $repo . ' ' . $path);
 		$this->_dirResolver->delete($path . '/.git');
 	}
 }

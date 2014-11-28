@@ -12,6 +12,7 @@ class OptionParser
 	const PATH      = 'path';
 	const FORCE     = 'force';
 	const COMPOSER  = 'composer';
+	const DEBUG     = 'debug';
 
 	private $_args;
 	private $_parsedOptions = [];

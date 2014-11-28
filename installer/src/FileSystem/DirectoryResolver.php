@@ -3,6 +3,7 @@
 namespace Message\Mothership\Install\FileSystem;
 
 use Message\Mothership\Install\System\SystemResolver;
+use Message\Mothership\Install\Command\ShellCommand;
 
 class DirectoryResolver
 {
@@ -30,7 +31,7 @@ class DirectoryResolver
 
 	public function current()
 	{
-		exec('pwd', $output);
+		ShellCommand::exec('pwd', $output);
 
 		return array_shift($output);
 	}
@@ -57,7 +58,7 @@ class DirectoryResolver
 
 	public function delete($path)
 	{
-		exec('rm -rf ' . $path);
+		ShellCommand::run('rm -rf ' . $path);
 	}
 
 	public function getAbsolute($path)
