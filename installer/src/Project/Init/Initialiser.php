@@ -6,6 +6,8 @@ use Message\Mothership\Install\Bin\Runner as BinRunner;
 use Message\Mothership\Install\Database\Config as DbConfig;
 use Message\Mothership\Install\Database\Install as DbInstall;
 use Message\Mothership\Install\Output\QuestionOutput;
+use Message\Mothership\Install\Project\PostInstall\File\Collection as PostInstallFiles;
+use Message\Mothership\Install\FileSystem;
 
 class Initialiser
 {
@@ -16,10 +18,13 @@ class Initialiser
 
 	public function __construct()
 	{
-		$this->_dbConfig  = new DbConfig;
-		$this->_dbInstall = new DbInstall;
-		$this->_question  = new QuestionOutput;
-		$this->_binRunner = new BinRunner;
+		$this->_dbConfig         = new DbConfig;
+		$this->_dbInstall        = new DbInstall;
+		$this->_question         = new QuestionOutput;
+		$this->_binRunner        = new BinRunner;
+		$this->_postInstallFiles = new PostInstallFiles;
+		$this->_dirResolver      = new FileSystem\DirectoryResolver;
+		$this->_fileResolver     = new FileSystem\FileResolver;
 	}
 
 	public function init($path)
@@ -31,6 +36,19 @@ class Initialiser
 		$this->_dbInstall->install($path);
 		$this->_binRunner->run($path, 'asset:dump');
 		$this->_binRunner->run($path, 'asset:generate');
+
+		$this->_createPostInstallFiles();
+
+		$this->_dirResolver->chmodR('public', 0777);
+	}
+
+	private function _createPostInstallFiles()
+	{
+		foreach ($this->_postInstallFiles as $file) {
+			$directory = $this->_dirResolver->get($file->getPath());
+			$file      = new FileSystem\File($file->getFilename(), $file->getContents());
+			$this->_fileResolver->create($file, $directory);
+		}
 	}
 
 	private function _askForDetails(array $dbConfig)
@@ -40,6 +58,9 @@ class Initialiser
 		while ($asking) {
 			$this->_question->ask("Please enter your database details:");
 			foreach ($dbConfig as $key => $value) {
+				if ($key === DbConfig::CHARSET) {
+					continue;
+				}
 				$this->_question->option($key . ' (defaults to `' . $value . '`):');
 				$wait = true;
 				while ($wait) {

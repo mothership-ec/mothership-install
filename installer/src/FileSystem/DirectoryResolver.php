@@ -46,7 +46,9 @@ class DirectoryResolver
 			throw new Exception\DirectoryExistsException('Path `' . $this->getAbsolute($path) . '` already exists!');
 		}
 
+		$oldUmask = umask(0);
 		mkdir($this->getAbsolute($path), $permission, (bool) $recursive);
+		umask($oldUmask);
 
 		return new Directory($path, $permission);
 	}
@@ -54,6 +56,23 @@ class DirectoryResolver
 	public function exists($path)
 	{
 		return is_dir($this->getAbsolute($path));
+	}
+
+	public function chmod($path, $permission)
+	{
+		$path = $this->getAbsolute($path);
+		$oldUmask = umask(0);
+		chmod($path, $permission);
+		umask($oldUmask);
+	}
+
+	public function chmodR($path, $permission)
+	{
+		$oldUmask = umask(0);
+		$path = $this->getAbsolute($path);
+		$permission = sprintf("%04o", $permission);
+		ShellCommand::run('chmod -R ' . $permission . ' ' . $path);
+		umask($oldUmask);
 	}
 
 	public function delete($path)

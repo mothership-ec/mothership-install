@@ -2,15 +2,15 @@
 
 namespace Message\Mothership\Install\Bin;
 
-use Message\Mothership\Install\Filesystem;
+use Message\Mothership\Install\FileSystem;
 
 class Validator
 {
 
 	public function __construct()
 	{
-		$this->_dirResolver  = new Filesystem\DirectoryResolver;
-		$this->_fileResolver = new Filesystem\FileResolver;
+		$this->_dirResolver  = new FileSystem\DirectoryResolver;
+		$this->_fileResolver = new FileSystem\FileResolver;
 	}
 
 	public function validate($path)

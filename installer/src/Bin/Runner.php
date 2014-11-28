@@ -3,6 +3,7 @@
 namespace Message\Mothership\Install\Bin;
 
 use Message\Mothership\Install\Command\ShellCommand;
+use Message\Mothership\Install\FileSystem\DirectoryResolver;
 
 class Runner
 {

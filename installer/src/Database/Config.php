@@ -2,7 +2,7 @@
 
 namespace Message\Mothership\Install\Database;
 
-use Message\Mothership\Install\Filesystem\DirectoryResolver;
+use Message\Mothership\Install\FileSystem\DirectoryResolver;
 use Symfony\Component\Yaml\Yaml;
 
 class Config

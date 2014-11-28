@@ -12,7 +12,13 @@ class Collection extends \ArrayObject
 			new HoldingDirectory,
 			new LogsDirectory,
 			new PublicDirectory,
+			new PublicAssetsDirectory,
+			new PublicBarcodesDirectory,
+			new PublicCogulesDirectory,
+			new PublicFilesDirectory,
+			new PublicResizeDirectory,
 			new TmpDirectory,
+			new TranslationsDirectory,
 		];
 
 		parent::__construct($dirs);
