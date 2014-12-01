@@ -22,8 +22,8 @@ abstract class AbstractOutput
 	 * Add an array of strings and output them in terminal
 	 *
 	 * @param array $lines
-	 * @param $foregroundColour
-	 * @param $backgroundColour
+	 * @param string $foregroundColour
+	 * @param string $backgroundColour
 	 */
 	protected function _outputLines(array $lines, $foregroundColour, $backgroundColour)
 	{

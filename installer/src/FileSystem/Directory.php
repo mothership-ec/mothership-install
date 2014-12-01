@@ -2,9 +2,24 @@
 
 namespace Message\Mothership\Install\FileSystem;
 
+/**
+ * Class Directory
+ * @package Message\Mothership\Install\FileSystem
+ *
+ * @author Thomas Marchant <thomas@message.co.uk>
+ *
+ * Model representing a directory
+ */
 class Directory
 {
+	/**
+	 * @var string
+	 */
 	private $_path;
+
+	/**
+	 * @var int
+	 */
 	private $_permission;
 
 	public function __construct($path, $permission)
@@ -13,6 +28,12 @@ class Directory
 		$this->setPermission($permission);
 	}
 
+	/**
+	 * @param string $path                  Path of directory
+	 * @throws \InvalidArgumentException
+	 *
+	 * @return Directory
+	 */
 	public function setPath($path)
 	{
 		if (!is_string($path)) {
@@ -24,11 +45,20 @@ class Directory
 		return $this;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getPath()
 	{
 		return $this->_path;
 	}
 
+	/**
+	 * Permission of directory
+	 *
+	 * @param int $permission
+	 * @return Directory
+	 */
 	public function setPermission($permission)
 	{
 		$this->_permission = $permission;
@@ -36,6 +66,9 @@ class Directory
 		return $this;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getPermission()
 	{
 		return $this->_permission;

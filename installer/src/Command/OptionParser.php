@@ -47,6 +47,12 @@ class OptionParser
 		return $this->_parsedOptions;
 	}
 
+	/**
+	 * Validate the arguments given are valid
+	 *
+	 * @throws \LogicException
+	 * @throws \InvalidArgumentException
+	 */
 	private function _validateArgs()
 	{
 		foreach ($this->_args as $arg) {
@@ -63,6 +69,18 @@ class OptionParser
 		}
 	}
 
+	/**
+	 * Parse the arguments given.
+	 *
+	 * This method searches for optional arguments that start with `--` and either assign values to them, for instance if
+	 * the argument passed is `--foo=bar` this will be represented as an array value of `'foo' => 'bar'`. However, if
+	 * there is no `=` sign, e.g. `--foo`, this will be represented as `'foo' => true`.
+	 *
+	 * Once it has parsed these options, it will check for the array values with keys of 1 and 2 and assign them to the
+	 * command and the type of installation to run.
+	 *
+	 * If no arguments are passed, it will default to an ecommerce installation
+	 */
 	private function _parseOptions()
 	{
 		$this->_parsedOptions[self::PHAR_PATH] = $this->_args[0];

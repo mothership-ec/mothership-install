@@ -7,10 +7,19 @@ namespace Message\Mothership\Install\FileSystem;
  * @package Message\Mothership\Install\FileSystem
  *
  * @author Thomas Marchant <thomas@message.co.uk>
+ *
+ * Class representing a file BEFORE it has been created
  */
 class File
 {
+	/**
+	 * @var string
+	 */
 	private $_name;
+
+	/**
+	 * @var string
+	 */
 	private $_contents;
 
 	public function __construct($name, $contents = '')
@@ -20,10 +29,12 @@ class File
 	}
 
 	/**
-	 * @param mixed $contents
+	 * Set the contents of the file
+	 *
+	 * @param string $contents                The contents of the file
 	 * @throws \InvalidArgumentException
 	 *
-	 * @return File         return $this for chainability
+	 * @return File
 	 */
 	public function setContents($contents)
 	{
@@ -37,7 +48,7 @@ class File
 	}
 
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getContents()
 	{
@@ -45,10 +56,12 @@ class File
 	}
 
 	/**
-	 * @param mixed $name
+	 * Set the name of the file
+	 *
+	 * @param string $name                     The name of the file
 	 * @throws \InvalidArgumentException
 	 *
-	 * @return File         return $this for chainability
+	 * @return File
 	 */
 	public function setName($name)
 	{
@@ -62,7 +75,7 @@ class File
 	}
 
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getName()
 	{

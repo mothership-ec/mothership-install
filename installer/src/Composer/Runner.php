@@ -4,21 +4,55 @@ namespace Message\Mothership\Install\Composer;
 
 use Message\Mothership\Install\Command\ShellCommand;
 
+/**
+ * Class Runner
+ * @package Message\Mothership\Install\Composer
+ *
+ * @author Thomas Marchant <thomas@message.co.uk>
+ *
+ * Class for running Composer commands
+ */
 class Runner
 {
+	/**
+	 * @var bool
+	 */
 	private $_debugMode = false;
 
+	/**
+	 * List of allowed Composer commands from the `__call()` method
+	 *
+	 * @var array
+	 */
 	private $_commands = [
 		'up',
 		'install',
 		'dumpautoload',
 	];
 
+	/**
+	 * List of Composer commands that create a `vendor` directory
+	 *
+	 * @var array
+	 */
 	private $_createVendor = [
 		'up',
 		'install',
 	];
 
+	/**
+	 * Run a Composer command from the list above.
+	 * If debug mode is enabled and an install fails, it will run Composer's diagnostics.
+	 *
+	 * Composer is automatically updated before any commands are run.
+	 *
+	 * @param string $command                           Composer command to run
+	 * @param array $args                               Arguments passed to method call. The first argument is the
+	 *                                                  only one that is used, and is the path to Composer if not
+	 *                                                  globally installed.
+	 * @throws Exception\InvalidComposerException
+	 * @throws Exception\ComposerException
+	 */
 	public function __call($command, $args)
 	{
 		if (!in_array($command, $this->_commands)) {
@@ -51,6 +85,13 @@ class Runner
 		}
 	}
 
+	/**
+	 * Enable debug mode
+	 *
+	 * @param bool $debugMode
+	 *
+	 * @return Runner
+	 */
 	public function debug($debugMode = true)
 	{
 		$this->_debugMode = (bool) $debugMode;
@@ -58,6 +99,13 @@ class Runner
 		return $this;
 	}
 
+	/**
+	 * Update the Composer installation
+	 *
+	 * @param $composer
+	 *
+	 * @return Runner
+	 */
 	public function selfUpdate($composer)
 	{
 		ShellCommand::run($composer . ' self-update');
@@ -65,6 +113,14 @@ class Runner
 		return $this;
 	}
 
+	/**
+	 * Run Composer's diagnostics to debug any problems
+	 *
+	 * @param string $path           Path of installation
+	 * @param string $composer       Composer command
+	 *
+	 * @return mixed
+	 */
 	private function _diagnose($path, $composer)
 	{
 		chdir($path);
@@ -73,12 +129,20 @@ class Runner
 		return $output;
 	}
 
+	/**
+	 * Get PHP command to run Composer, if Composer is not globally installed
+	 *
+	 * @param string $composerPath      Absolute path to Composer installation (or bin/composer if run from source)
+	 * @throws \LogicException
+	 *
+	 * @return string
+	 */
 	private function _getComposerCommand($composerPath)
 	{
-		if (!preg_match('/.+\/composer\.phar$/', $composerPath)) {
-			throw new \LogicException('`' . $composerPath . '` is not a valid Composer installation');
+		if (!preg_match('/\/.*\/(bin\/composer|composer\.phar)?$/', $composerPath)) {
+			throw new Exception\InvalidComposerException('`' . $composerPath . '` is not a valid Composer installation');
 		} elseif (!file_exists($composerPath)) {
-			throw new \LogicException('`' . $composerPath . '` does not exist!');
+			throw new Exception\InvalidComposerException('`' . $composerPath . '` does not exist!');
 		}
 
 		return 'php ' . $composerPath;
