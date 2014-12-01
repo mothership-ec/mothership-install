@@ -15,6 +15,7 @@ class Collection extends \ArrayObject
 			new HtaccessFile,
 			new IndexFile,
 			new ResizeGitignoreFile,
+			new TranslationsEnFile,
 		];
 
 		parent::__construct($files);

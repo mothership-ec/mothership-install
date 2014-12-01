@@ -5,9 +5,25 @@ namespace Message\Mothership\Install\Bin;
 use Message\Mothership\Install\Command\ShellCommand;
 use Message\Mothership\Install\FileSystem\DirectoryResolver;
 
+/**
+ * Class Runner
+ * @package Message\Mothership\Install\Bin
+ *
+ * @author Thomas Marchant <thomas@message.co.uk>
+ *
+ * Class for running Cog commands. Can only be used after the installation has taken place.
+ */
 class Runner
 {
+	/**
+	 * @var Validator
+	 */
 	private $_validator;
+
+	/**
+	 * @var \Message\Mothership\Install\FileSystem\DirectoryResolver
+	 */
+	private $_dirResolver;
 
 	public function __construct()
 	{
@@ -15,6 +31,13 @@ class Runner
 		$this->_dirResolver = new DirectoryResolver;
 	}
 
+	/**
+	 * Runs Cog command
+	 *
+	 * @param string $path                Path of installation
+	 * @param string $command             Cog command to run
+	 * @throws \InvalidArgumentException
+	 */
 	public function run($path, $command)
 	{
 		if (!is_string($command)) {
@@ -26,6 +49,13 @@ class Runner
 		ShellCommand::Run($path . ' ' . $command);
 	}
 
+	/**
+	 * Validate that the Cog bin files have been installed properly
+	 *
+	 * @param string $path         Path of installation
+	 *
+	 * @return string              Absolute path of installation
+	 */
 	private function _parsePath($path)
 	{
 		$this->_validator->validate($path);

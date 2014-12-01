@@ -1,12 +1,11 @@
 <?php
 
-namespace Message\Mothership\Install\Database;
+namespace Message\Mothership\Install\Project\Database;
 
 use Message\Mothership\Install\Bin\Runner;
 
 class Install
 {
-
 	public function __construct()
 	{
 		$this->_runner = new Runner;

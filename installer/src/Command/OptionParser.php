@@ -4,6 +4,14 @@ namespace Message\Mothership\Install\Command;
 
 use Message\Mothership\Install\Project\Types;
 
+/**
+ * Class OptionParser
+ * @package Message\Mothership\Install\Command
+ *
+ * @author Thomas Marchant <thomas@message.co.uk>
+ *
+ * Class for parsing the options passed to the the install command
+ */
 class OptionParser
 {
 	const PHAR_PATH = 'phar_path';
@@ -14,7 +22,14 @@ class OptionParser
 	const COMPOSER  = 'composer';
 	const DEBUG     = 'debug';
 
+	/**
+	 * @var array
+	 */
 	private $_args;
+
+	/**
+	 * @var array
+	 */
 	private $_parsedOptions = [];
 
 	public function __construct(array $args)
@@ -24,6 +39,9 @@ class OptionParser
 		$this->_parseOptions();
 	}
 
+	/**
+	 * @return array
+	 */
 	public function getParsedOptions()
 	{
 		return $this->_parsedOptions;

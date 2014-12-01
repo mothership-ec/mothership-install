@@ -3,21 +3,27 @@
 namespace Message\Mothership\Install\Project\Init;
 
 use Message\Mothership\Install\Bin\Runner as BinRunner;
-use Message\Mothership\Install\Database\Config as DbConfig;
-use Message\Mothership\Install\Database\Install as DbInstall;
+use Message\Mothership\Install\Project\Config\App\Config as AppConfig;
+use Message\Mothership\Install\Project\Config\Database\Config as DbConfig;
+use Message\Mothership\Install\Project\Database\Install as DbInstall;
 use Message\Mothership\Install\Output\QuestionOutput;
 use Message\Mothership\Install\Project\PostInstall\File\Collection as PostInstallFiles;
 use Message\Mothership\Install\FileSystem;
 
 class Initialiser
 {
+	private $_appConfig;
 	private $_dbConfig;
 	private $_dbInstall;
 	private $_question;
 	private $_binRunner;
+	private $_postInstallFiles;
+	private $_dirResolver;
+	private $_fileResolver;
 
 	public function __construct()
 	{
+		$this->_appConfig        = new AppConfig;
 		$this->_dbConfig         = new DbConfig;
 		$this->_dbInstall        = new DbInstall;
 		$this->_question         = new QuestionOutput;
@@ -29,17 +35,19 @@ class Initialiser
 
 	public function init($path)
 	{
-		$dbConfig = $this->_dbConfig->getConfig($path);
-		$dbConfig = $this->_askForDetails($dbConfig);
-		$this->_dbConfig->setConfig($path, $dbConfig);
+		$this->_appConfig->askForDetails($path);
 
+		$this->_dbConfig->askForDetails($path);
 		$this->_dbInstall->install($path);
+
 		$this->_binRunner->run($path, 'asset:dump');
 		$this->_binRunner->run($path, 'asset:generate');
 
 		$this->_createPostInstallFiles();
 
 		$this->_dirResolver->chmodR('public', 0777);
+
+		$this->_binRunner->run($path, 'task:run user:create_admin');
 	}
 
 	private function _createPostInstallFiles()
@@ -51,30 +59,5 @@ class Initialiser
 		}
 	}
 
-	private function _askForDetails(array $dbConfig)
-	{
-		$asking = true;
 
-		while ($asking) {
-			$this->_question->ask("Please enter your database details:");
-			foreach ($dbConfig as $key => $value) {
-				if ($key === DbConfig::CHARSET) {
-					continue;
-				}
-				$this->_question->option($key . ' (defaults to `' . $value . '`):');
-				$wait = true;
-				while ($wait) {
-					$fh = fopen('php://stdin', 'r');
-					$input = fgets($fh, 1024);
-					if (null !== $input) {
-						$dbConfig[$key] = (trim($input) !== '') ? trim($input) : $value;
-						$wait = false;
-					}
-				}
-			}
-			$asking = false;
-		}
-
-		return $dbConfig;
-	}
 }
