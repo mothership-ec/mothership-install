@@ -48,7 +48,7 @@ class Config extends AbstractConfig
 		$config = $this->getConfig($path);
 
 		$ask = [
-			self::NAME    => 'Application name',
+			self::NAME    => 'Website name',
 			self::EMAIL   => 'Default contact email',
 			self::BASEURL => 'Base URL'
 		];

@@ -105,7 +105,7 @@ class OptionParser
 			}
 		}
 
-		$this->_parsedOptions[self::COMMAND] = array_key_exists(1, $this->_args) ? $this->_args[1] : Commands::INSTALL;
-		$this->_parsedOptions[self::TYPE]    = array_key_exists(2, $this->_args) ? $this->_args[2] : Types::ECOMMERCE;
+		$this->_parsedOptions[self::TYPE]    = array_key_exists(1, $this->_args) ? $this->_args[1] : Types::ECOMMERCE;
+		$this->_parsedOptions[self::COMMAND] = array_key_exists(2, $this->_args) ? $this->_args[2] : Commands::INSTALL;
 	}
 }
