@@ -4,6 +4,14 @@ namespace Message\Mothership\Install\Project\RootFile;
 
 use Message\Mothership\Install\FileSystem\File;
 
+/**
+ * Class Collection
+ * @package Message\Mothership\Install\Project\RootFile
+ *
+ * @author Thomas Marchant <thomas@message.co.uk>
+ *
+ * Collection of all the root files to be created during installation
+ */
 class Collection extends \ArrayObject
 {
 	public function __construct()

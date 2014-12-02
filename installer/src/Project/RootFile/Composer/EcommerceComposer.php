@@ -4,13 +4,27 @@ namespace Message\Mothership\Install\Project\RootFile\Composer;
 
 use Message\Mothership\Install\Project\Types;
 
+/**
+ * Class EcommerceComposer
+ * @package Message\Mothership\Install\Project\RootFile\Composer
+ *
+ * @author Thomas Marchant <thomas@message.co.uk>
+ *
+ * Dependency setup for a basic ecommerce site
+ */
 class EcommerceComposer extends AbstractComposer
 {
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getName()
 	{
 		return Types::ECOMMERCE;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getContents()
 	{
 		return <<<'EOD'

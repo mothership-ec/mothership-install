@@ -9,15 +9,49 @@ use Message\Mothership\Install\Project\RootFile\Collection as RootFileCollection
 use Message\Mothership\Install\Project\Directory\Collection as DirectoryCollection;
 use Message\Mothership\Install\Composer\Runner as ComposerRunner;
 
+/**
+ * Class AbstractInstaller
+ * @package Message\Mothership\Install\Project\Installer
+ *
+ * @author Thomas Marchant <thomas@message.co.uk>
+ *
+ * Abstract class for running the majority of the installation commands
+ */
 abstract class AbstractInstaller implements InstallerInterface
 {
+	/**
+	 * @var \Message\Mothership\Install\FileSystem\DirectoryResolver
+	 */
 	private $_dirResolver;
+
+	/**
+	 * @var \Message\Mothership\Install\FileSystem\FileResolver
+	 */
 	private $_fileResolver;
+
+	/**
+	 * @var \Message\Mothership\Install\Project\Theme\Downloader
+	 */
 	private $_themeDownloader;
+
+	/**
+	 * @var \Message\Mothership\Install\Project\RootFile\Collection
+	 */
 	private $_rootFiles;
+
+	/**
+	 * @var \Message\Mothership\Install\Project\Directory\Collection
+	 */
 	private $_directories;
+
+	/**
+	 * @var \Message\Mothership\Install\Composer\Runner
+	 */
 	private $_composer;
 
+	/**
+	 * @var array
+	 */
 	private $_options;
 
 	public function __construct()
@@ -30,6 +64,9 @@ abstract class AbstractInstaller implements InstallerInterface
 		$this->_composer        = new ComposerRunner;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function install(array $options)
 	{
 		$this->_options = $options;
@@ -50,6 +87,11 @@ abstract class AbstractInstaller implements InstallerInterface
 		}
 	}
 
+	/**
+	 * Save the root files registered in the RootFile\Collection class
+	 *
+	 * @param string $path
+	 */
 	private function _saveRootFiles($path)
 	{
 		$directory = $this->_dirResolver->get($path, !empty($this->_options[OptionParser::FORCE]));
@@ -64,6 +106,11 @@ abstract class AbstractInstaller implements InstallerInterface
 		$this->_fileResolver->create($composer, $directory);
 	}
 
+	/**
+	 * Create the directories registered in the Directory\Collection class
+	 *
+	 * @param string $path
+	 */
 	private function _saveDirectories($path)
 	{
 		foreach ($this->_directories as $dir) {

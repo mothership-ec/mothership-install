@@ -5,6 +5,14 @@ namespace Message\Mothership\Install\Project\Config\App;
 use Message\Mothership\Install\Project\Config\AbstractConfig;
 use Message\Mothership\Install\Project\Config\Exception;
 
+/**
+ * Class Config
+ * @package Message\Mothership\Install\Project\Config\App
+ *
+ * @author Thomas Marchant <thomas@message.co.uk>
+ *
+ * Class for setting the application configuration for the installation
+ */
 class Config extends AbstractConfig
 {
 	const CONFIG_PATH = 'config/app.yml';
@@ -14,7 +22,7 @@ class Config extends AbstractConfig
 	const EMAIL            = 'default-contact-email';
 	const EMAIL_FROM       = 'default-email-from';
 	const EMAIL_FROM_NAME  = 'name';
-	const EMAIL_FROM_EMAIL = 'from';
+	const EMAIL_FROM_EMAIL = 'email';
 	const CSRF             = 'csrf-secret';
 	const RESIZE           = 'image-resize';
 	const DEFAULT_IMAGE    = 'default-image-path';
@@ -22,11 +30,17 @@ class Config extends AbstractConfig
 
 	const IMAGE_RESIZE_DEFAULT = 'cogules/Mothership:Site/images/default.png';
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getConfigPath()
 	{
 		return self::CONFIG_PATH;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function askForDetails($path)
 	{
 		$asking = true;
@@ -61,6 +75,9 @@ class Config extends AbstractConfig
 		$this->setConfig($path, $config);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function validateConfig(array $config)
 	{
 		$keys = [
@@ -102,6 +119,13 @@ class Config extends AbstractConfig
 
 	}
 
+	/**
+	 * Apply automatic config settings that the user does not input during installation
+	 *
+	 * @param array $config
+	 *
+	 * @return array
+	 */
 	private function _generateDefaults(array $config)
 	{
 		$rand = mt_rand(0, 1000);

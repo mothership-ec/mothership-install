@@ -5,6 +5,14 @@ namespace Message\Mothership\Install\Project\Config\Database;
 use Message\Mothership\Install\Project\Config\Exception;
 use Message\Mothership\Install\Project\Config\AbstractConfig;
 
+/**
+ * Class Config
+ * @package Message\Mothership\Install\Project\Config\Database
+ *
+ * @author Thomas Marchant <thomas@message.co.uk>
+ *
+ * Class for setting the database configuration for the installation
+ */
 class Config extends AbstractConfig
 {
 	const CONFIG_PATH = 'config/db.yml';
@@ -15,11 +23,17 @@ class Config extends AbstractConfig
 	const NAME    = 'name';
 	const CHARSET = 'charset';
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getConfigPath()
 	{
 		return self::CONFIG_PATH;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function askForDetails($path)
 	{
 		$asking = true;
@@ -49,6 +63,9 @@ class Config extends AbstractConfig
 		$this->setConfig($path, $dbConfig);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function validateConfig(array $dbConfig)
 	{
 		$required = [

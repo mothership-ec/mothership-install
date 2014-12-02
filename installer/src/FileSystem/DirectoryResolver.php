@@ -12,6 +12,8 @@ use Message\Mothership\Install\Command\ShellCommand;
  * @author Thomas Marchant <thomas@message.co.uk>
  *
  * Class for handling changes to directories in the file system
+ *
+ * @todo allow installation on Windows machines
  */
 class DirectoryResolver
 {
@@ -23,7 +25,7 @@ class DirectoryResolver
 	public function __construct()
 	{
 		$this->_sysResolver = new SystemResolver;
-		$this->_sysResolver->validateCompatability();
+		$this->_sysResolver->validateCompatibility();
 	}
 
 	/**

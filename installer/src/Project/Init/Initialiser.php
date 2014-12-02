@@ -10,6 +10,15 @@ use Message\Mothership\Install\Output\QuestionOutput;
 use Message\Mothership\Install\Project\PostInstall\File\Collection as PostInstallFiles;
 use Message\Mothership\Install\FileSystem;
 
+/**
+ * Class Initialiser
+ * @package Message\Mothership\Install\Project\Init
+ *
+ * @author Thomas Marchant <thomas@message.co.uk>
+ *
+ * Class to handle post-installation setup.
+ * This class handles anything that relies on the installation being complete, such as running Cog commands.
+ */
 class Initialiser
 {
 	private $_appConfig;
@@ -33,6 +42,11 @@ class Initialiser
 		$this->_fileResolver     = new FileSystem\FileResolver;
 	}
 
+	/**
+	 * Run post-installation tasks
+	 *
+	 * @param string $path
+	 */
 	public function init($path)
 	{
 		$this->_appConfig->askForDetails($path);
@@ -50,6 +64,9 @@ class Initialiser
 		$this->_binRunner->run($path, 'task:run user:create_admin');
 	}
 
+	/**
+	 * Create files that exist in directories that were created during the installation setup
+	 */
 	private function _createPostInstallFiles()
 	{
 		foreach ($this->_postInstallFiles as $file) {

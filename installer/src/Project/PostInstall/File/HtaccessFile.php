@@ -2,18 +2,35 @@
 
 namespace Message\Mothership\Install\Project\PostInstall\File;
 
+/**
+ * Class HtaccessFile
+ * @package Message\Mothership\Install\Project\PostInstall\File
+ *
+ * @author Thomas Marchant <thomas@message.co.uk>
+ *
+ * Class for basic .htaccess file
+ */
 class HtaccessFile implements FileInterface
 {
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getFilename()
 	{
 		return '.htaccess';
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getPath()
 	{
 		return 'public';
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getContents()
 	{
 		return <<<'EOD'
