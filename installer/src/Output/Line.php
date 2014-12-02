@@ -10,6 +10,8 @@ use Colors\NoStyleFoundException;
  * @package Message\Mothership\Install\Output
  *
  * @author Thomas Marchant <thomas@message.co.uk>
+ *
+ * Class representing a line of text to display in the terminal.
  */
 class Line
 {
@@ -30,6 +32,11 @@ class Line
 		}
 	}
 
+	/**
+	 * Echo text in the line object, with the background and foreground colours.
+	 *
+	 * @return string
+	 */
 	public function __toString()
 	{
 		try {

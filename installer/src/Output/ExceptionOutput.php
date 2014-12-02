@@ -2,6 +2,8 @@
 
 namespace Message\Mothership\Install\Output;
 
+use Message\Mothership\Install\Exception;
+
 /**
  * Class ExceptionOutput
  * @package Message\Mothership\Install\Output
@@ -47,6 +49,10 @@ class ExceptionOutput extends AbstractOutput
 	{
 		$this->_addLine(get_class($this->_exception) . ' thrown: ' . $this->_exception->getMessage(), 'black', 'red');
 		$this->_addLine($this->_exception->getFile() . ' line ' . $this->_exception->getLine(), 'red');
+
+		if ($this->_exception instanceof Exception\OutputException) {
+			$this->_addLines($this->_exception->getOutput(), 'yellow', 'black');
+		}
 	}
 
 	/**
@@ -59,7 +65,7 @@ class ExceptionOutput extends AbstractOutput
 		$compressed = [];
 
 		foreach ($this->_exception->getTrace() as $line) {
-			$compressed[] = implode(':', $line);
+			$compressed[] = is_array($line) ? implode(':', $line) : $line;
 		}
 
 		return $compressed;
