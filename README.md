@@ -15,7 +15,7 @@ To set up Mothership using the installer, you must have the following:
 	+ Please note that **we cannot currently offer any guarantee that Mothership itself will work properly in a Windows environment**
 + **Composer**
 	+ Composer is a PHP dependency manager which can be downloaded from <a href="https://getcomposer.org/download/">the Composer website</a>.
-	+ It is recommended that you install Composer globally or adding the following line to your `.bash_profile`
+	+ It is recommended that you install Composer either globally or by adding the following line to your `.bash_profile`
 	
 	```
 	alias composer='php /[path/to]/composer.phar'
