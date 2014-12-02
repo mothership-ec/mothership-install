@@ -60,7 +60,7 @@ Class Message\Cog\Config\FixtureManager is not autoloadable, can not call post-p
 + Copy 'assets' over to the `public` directory. In this instance, an 'asset' is any file that is required by the browser, such as CSS, JavaScript and image files. It will also minify any CSS or JavaScript files.
 + Create any necessary files that exist within directories of the Mothership installation, such as the `.htaccess` file, and various `.gitignore` files.
 + Recursively change the permissions of the `public` directory to a `0777` permission.
-+ **Ask the user for details about the first admin user (*Note:** If you add in the wrong details here, don't worry, they can be edited from the Mothership admin panel - although obviously you will need to log in using the details you entered here)**
++ **Ask the user for details about the first admin user (*Note:* If you add in the wrong details here, don't worry, they can be edited from the Mothership admin panel - although obviously you will need to log in using the details you entered here)**
 	+ Forename
 	+ Surname
 	+ Email
