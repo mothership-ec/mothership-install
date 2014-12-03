@@ -2,6 +2,7 @@
 
 namespace Message\Mothership\Install\Project\Database;
 
+use Message\Mothership\Install\Output\InfoOutput;
 use Message\Mothership\Install\Bin\Runner;
 
 /**
@@ -14,9 +15,20 @@ use Message\Mothership\Install\Bin\Runner;
  */
 class Install
 {
+	/**
+	 * @var \Message\Mothership\Install\Bin\Runner
+	 */
+	private $_runner;
+
+	/**
+	 * @var \Message\Mothership\Install\Output\InfoOutput
+	 */
+	private $_info;
+
 	public function __construct()
 	{
 		$this->_runner = new Runner;
+		$this->_info   = new InfoOutput;
 	}
 
 	/**
@@ -26,6 +38,7 @@ class Install
 	 */
 	public function install($path)
 	{
+		$this->_info->info('Installing database tables, this might take a while');
 		$this->_runner->run($path, 'migrate:install');
 		$this->_runner->run($path, 'migrate:run');
 	}

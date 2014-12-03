@@ -56,15 +56,9 @@ class Config extends AbstractConfig
 		while ($asking) {
 			$this->_question->ask("Please enter your application details:");
 			foreach ($ask as $key => $name) {
-				$this->_question->option($name . ':');
-				$wait = true;
-				while ($wait) {
-					$fh = fopen('php://stdin', 'r');
-					$input = trim(fgets($fh, 1024));
-					if (null !== $input) {
-						$config[$key] = ($input !== '') ? $input : $config[$key];
-						$wait = false;
-					}
+				$input = $this->_ask($name, ($key === self::EMAIL));
+				if (null !== $input) {
+					$config[$key] = ($input !== '') ? $input : $config[$key];
 				}
 			}
 			$asking = false;
@@ -73,6 +67,21 @@ class Config extends AbstractConfig
 		$config = $this->_generateDefaults($config);
 
 		$this->setConfig($path, $config);
+	}
+
+	private function _ask($option, $isEmail)
+	{
+		$this->_question->option($option . ':');
+		while (true) {
+			$fh = fopen('php://stdin', 'r');
+			$input = trim(fgets($fh, 1024));
+			if (($input !== '') && $isEmail && !filter_var($input, FILTER_VALIDATE_EMAIL)) {
+				$this->_question->invalid('`' . $input . '` is not a valid email address');
+				return $this->_ask($option, $isEmail);
+			}
+
+			return $input;
+		}
 	}
 
 	/**

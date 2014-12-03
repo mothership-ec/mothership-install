@@ -8,6 +8,7 @@ use Message\Mothership\Install\Project\Theme\Downloader as ThemeDownloader;
 use Message\Mothership\Install\Project\RootFile\Collection as RootFileCollection;
 use Message\Mothership\Install\Project\Directory\Collection as DirectoryCollection;
 use Message\Mothership\Install\Composer\Runner as ComposerRunner;
+use Message\Mothership\Install\Output\InfoOutput;
 
 /**
  * Class AbstractInstaller
@@ -62,6 +63,7 @@ abstract class AbstractInstaller implements InstallerInterface
 		$this->_rootFiles       = new RootFileCollection;
 		$this->_directories     = new DirectoryCollection;
 		$this->_composer        = new ComposerRunner;
+		$this->_info            = new InfoOutput;
 	}
 
 	/**
@@ -76,6 +78,8 @@ abstract class AbstractInstaller implements InstallerInterface
 			$this->_options[OptionParser::PATH] : $this->_dirResolver->current();
 		$path = $this->_dirResolver->getAbsolute($path);
 
+		$this->_info->heading('Installing a Mothership ' . ucfirst($this->_options[OptionParser::TYPE] . ' site to ' . $path));
+
 		$this->_themeDownloader->download($this->getTheme(), $path);
 		$this->_saveRootFiles($path);
 		$this->_saveDirectories($path);
@@ -85,6 +89,8 @@ abstract class AbstractInstaller implements InstallerInterface
 		} else {
 			$this->_composer->install($path);
 		}
+
+		$this->_info->heading('Mothership filesystem set up complete!');
 	}
 
 	/**

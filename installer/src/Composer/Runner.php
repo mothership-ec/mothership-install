@@ -3,6 +3,7 @@
 namespace Message\Mothership\Install\Composer;
 
 use Message\Mothership\Install\Command\ShellCommand;
+use Message\Mothership\Install\Output\InfoOutput;
 
 /**
  * Class Runner
@@ -14,6 +15,11 @@ use Message\Mothership\Install\Command\ShellCommand;
  */
 class Runner
 {
+	/**
+	 * @var \Message\Mothership\Install\Output\InfoOutput
+	 */
+	private $_info;
+
 	/**
 	 * @var bool
 	 */
@@ -40,6 +46,11 @@ class Runner
 		'install',
 	];
 
+	public function __construct()
+	{
+		$this->_info = new InfoOutput;
+	}
+
 	/**
 	 * Run a Composer command from the list above.
 	 * If debug mode is enabled and an install fails, it will run Composer's diagnostics.
@@ -56,7 +67,7 @@ class Runner
 	public function __call($command, $args)
 	{
 		if (!in_array($command, $this->_commands)) {
-			throw new Exception\InvalidComposerException('`' . $command . '` is not a support command');
+			throw new Exception\InvalidComposerException('`' . $command . '` is not a supported command');
 		}
 
 		$composer = 'composer';
@@ -78,6 +89,10 @@ class Runner
 		chdir($path);
 		$shCommand = $composer . ' ' . $command . ($this->_debugMode === true ? ' --verbose' : '');
 
+		$this->_info->info('Running `' . $shCommand . '`, this may take a while');
+		if (in_array($command, $this->_createVendor)) {
+			$this->_info->info('Please note that Composer will show warnings until `message\cog` has been installed. Do not worry about these messages');
+		}
 		ShellCommand::run($shCommand);
 
 		if (in_array($command, $this->_createVendor) && !is_dir($path . '/vendor')) {
@@ -108,6 +123,7 @@ class Runner
 	 */
 	public function selfUpdate($composer)
 	{
+		$this->_info->info('Checking Composer for updates');
 		ShellCommand::run($composer . ' self-update');
 
 		return $this;

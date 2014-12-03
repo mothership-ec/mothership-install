@@ -20,10 +20,6 @@ class QuestionOutput extends AbstractOutput
 	 */
 	public function ask($text)
 	{
-		if (!is_string($text)) {
-			throw new \InvalidArgumentException('Text expected to be a string, ' . gettype($text) . ' given');
-		}
-
 		$this->_outputLine($text, 'black', 'green');
 	}
 
@@ -35,10 +31,16 @@ class QuestionOutput extends AbstractOutput
 	 */
 	public function option($text)
 	{
-		if (!is_string($text)) {
-			throw new \InvalidArgumentException('Text expected to be a string, ' . gettype($text) . ' given');
-		}
-
 		$this->_outputLine($text, 'cyan');
+	}
+
+	/**
+	 * Display text that lets the user know their input was invalid
+	 *
+	 * @param $text
+	 */
+	public function invalid($text)
+	{
+		$this->_outputLine($text, 'red');
 	}
 }
