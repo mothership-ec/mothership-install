@@ -5,7 +5,7 @@
 To set up Mothership using the installer, you must have the following:
 
 + **PHP** 5.4.0 or higher
-	+ **PHP intl extention** (see <a href="http://php.net/manual/en/intl.setup.php">http://php.net/manual/en/intl.setup.php</a>) 
+	+ **PHP intl extention** (see <a href="http://php.net/manual/en/intl.setup.php">http://php.net/manual/en/intl.setup.php</a>)
 + **MySQL** 5.1.0 or higher
 + **Apache**
 	+ **We cannot currently offer any guarantee that Mothership works with Nginx or other server software**
@@ -16,7 +16,7 @@ To set up Mothership using the installer, you must have the following:
 + **Composer**
 	+ Composer is a PHP dependency manager which can be downloaded from <a href="https://getcomposer.org/download/">the Composer website</a>.
 	+ It is recommended that you install Composer either globally or by adding the following line to your `.bash_profile`
-	
+
 	```
 	alias composer='php /[path/to]/composer.phar'
 
@@ -102,6 +102,7 @@ To compile the installer from source, first you need to clone this repo, and the
 This will delete any existing file named `mothership.phar` in the `build` directory and create a new one from the source code.
 
 ## TODO
++ Remove compatibility
 + More installation types e.g. CMS, EPOS, Minimal etc.
 + Add more command options e.g. self-update, uninstall etc.
 + Ability to set a custom theme
