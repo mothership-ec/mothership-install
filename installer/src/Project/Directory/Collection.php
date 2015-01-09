@@ -26,7 +26,6 @@ class Collection extends \ArrayObject
 			new PublicFilesDirectory,
 			new PublicResizeDirectory,
 			new TmpDirectory,
-			new TranslationsDirectory,
 		];
 
 		parent::__construct($dirs);

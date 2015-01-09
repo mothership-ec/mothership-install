@@ -13,10 +13,6 @@ use Message\Mothership\Install\Command\ShellCommand;
  * @author Thomas Marchant <thomas@message.co.uk>
  *
  * Class for downloading a git repo into the installation, and removing it from the git archive.
- *
- * @todo implement the ability to register multiple themes, and select which one you want to use in the install command
- * @todo Allow themes to live on a specific branch
- * @todo Create a `Theme` object to store the repo URL and branch name
  */
 class Downloader
 {
@@ -37,12 +33,12 @@ class Downloader
 	}
 
 	/**
-	 * Download the Git repo for the theme
+	 * Download the Git repo for a theme
 	 *
-	 * @param string $repo     The Git repo's clone URL
-	 * @param string $path     The path of the installation
+	 * @param ThemeInterface $theme
+	 * @param $path
 	 */
-	public function download($repo, $path)
+	public function download(ThemeInterface $theme, $path)
 	{
 		$path = $this->_dirResolver->getAbsolute($path);
 
@@ -52,7 +48,8 @@ class Downloader
 		}
 
 		$this->_info->info('Downloading theme, this may take a while');
-		ShellCommand::run('git clone ' . $repo . ' ' . $path);
+		ShellCommand::run('git clone -b ' . $theme->getBranch() . ' --single-branch '  . $theme->getGitRepo() . ' ' . $path);
 		$this->_dirResolver->delete($path . '/.git');
+		$this->_dirResolver->delete($path . '/.gitignore');
 	}
 }

@@ -3,18 +3,18 @@
 namespace Message\Mothership\Install\Project\Installer;
 
 use Message\Mothership\Install\Project\Types;
-use Message\Mothership\Install\Project\RootFile\Composer\EcommerceComposer;
-use Message\Mothership\Install\Project\Theme\EcommerceTheme;
+use Message\Mothership\Install\Project\RootFile\Composer\CmsComposer;
+use Message\Mothership\Install\Project\Theme\CmsTheme;
 
 /**
- * Class EcommerceInstaller
+ * Class CmsInstaller
  * @package Message\Mothership\Install\Project\Installer
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
- * Installer for an Ecommerce site
+ * Installer for an CMS site
  */
-class EcommerceInstaller extends AbstractInstaller
+class CmsInstaller extends AbstractInstaller
 {
 	/**
 	 * {@inheritDoc}
@@ -29,7 +29,7 @@ class EcommerceInstaller extends AbstractInstaller
 	 */
 	public function getTheme()
 	{
-		return new EcommerceTheme;
+		return new CmsTheme;
 	}
 
 	/**
@@ -37,6 +37,6 @@ class EcommerceInstaller extends AbstractInstaller
 	 */
 	public function getComposerTemplate()
 	{
-		return new EcommerceComposer;
+		return new CmsComposer;
 	}
 }

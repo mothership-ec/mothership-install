@@ -20,11 +20,9 @@ interface InstallerInterface
 	public function getName();
 
 	/**
-	 * Get the path to the Git repo of the theme to check out
+	 * Get ThemeInterface instance to determine the theme path and branch
 	 *
-	 * @todo make 'Themes' a model and allow some way of varying which theme can be installed
-	 *
-	 * @return string
+	 * @return \Message\Mothership\Install\Project\Theme\ThemeInterface
 	 */
 	public function getTheme();
 
