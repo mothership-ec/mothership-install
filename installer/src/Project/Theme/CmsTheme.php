@@ -2,7 +2,7 @@
 
 namespace Message\Mothership\Install\Project\Theme;
 
-class CmsTheme
+class CmsTheme implements ThemeInterface
 {
 	public function getBranch()
 	{

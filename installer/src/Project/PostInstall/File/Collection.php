@@ -23,6 +23,7 @@ class Collection extends \ArrayObject
 			new HtaccessFile,
 			new IndexFile,
 			new ResizeGitignoreFile,
+			new TmpGitignoreFile,
 		];
 
 		parent::__construct($files);

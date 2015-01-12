@@ -36,10 +36,10 @@ class CmsComposer extends AbstractComposer
 		}
 	],
 	"require": {
-		"message/cog" : "dev-feature/umask-on-asset-tasks as 3.5.0",
 
 		"message/cog-mothership-user"     : "~3.3",
 		"message/cog-mothership-cms"      : "~3.0",
+		"message/cog-mothership-reports"  : "~1.0",
 		"message/twitter"                 : "~1.0"
 	},
 	"suggest": {
