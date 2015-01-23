@@ -97,7 +97,7 @@ You can pass the script the following options:
 
 ## Compiling
 
-To compile the installer from source, first you need to clone this repo, and then run `php compile.php` from within the repository.
+To compile the installer from source, first you need to clone this repo, run `composer up`, and then run `php compile.php` from within the repository.
 
 This will delete any existing file named `mothership.phar` in the `build` directory and create a new one from the source code.
 
@@ -107,3 +107,14 @@ This will delete any existing file named `mothership.phar` in the `build` direct
 + Add more command options e.g. self-update, uninstall etc.
 + Ability to set a custom theme
 + Windows compatibility
+
+## License
+
+Mothership E-Commerce
+Copyright (C) 2015 Jamie Freeman
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
