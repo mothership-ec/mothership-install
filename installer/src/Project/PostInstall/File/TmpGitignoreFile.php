@@ -15,6 +15,6 @@ class TmpGitignoreFile extends AbstractGitignoreFile
 	 */
 	public function getPath()
 	{
-		return 'public/tmp';
+		return 'tmp';
 	}
 }
