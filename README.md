@@ -54,7 +54,7 @@ Class Message\Cog\Config\FixtureManager is not autoloadable, can not call post-p
 + **Ask the user for the following database details (*Note:* It is imperative that you get these details correct. If you get these wrong the installation will fail!):**
 	+ Hostname (defaults to '127.0.0.1')
 	+ User (defaults to 'user')
-	+ Pass (defaults to '')
+	+ Pass (defaults to 'password')
 	+ Name (defaults to 'table_name')
 + Run the database migrations i.e. add all the necessary tables
 	+ **Note:** This will take a long time, and some error messages will display for failed migrations. Do not worry, this is down to a known issue within Mothership's `Cog` framework and does not affect the installation process
@@ -82,6 +82,9 @@ There are three types of options that the installer takes - the `install type`, 
 	+ Vouchers
 	+ Returns
 	+ Reports
++ `cms`
+    + CMS
+    + Reports
 
 #### Commands
 + `install` - This is the default option. It requires that the `install type` has been set to be recognised. This option will install the site.
@@ -103,19 +106,8 @@ To compile the installer from source, first you need to clone this repo, run `co
 This will delete any existing file named `mothership.phar` in the `build` directory and create a new one from the source code.
 
 ## TODO
-+ Remove compatibility
-+ More installation types e.g. CMS, EPOS, Minimal etc.
++ More installation types e.g. EPOS, Minimal etc.
 + Add more command options e.g. self-update, uninstall etc.
 + Ability to set a custom theme
 + Windows compatibility
 
-## License
-
-Mothership E-Commerce
-Copyright (C) 2015 Jamie Freeman
-
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
