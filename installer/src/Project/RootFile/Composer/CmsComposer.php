@@ -31,9 +31,9 @@ class CmsComposer extends AbstractComposer
 {
 	"require": {
 
-		"mothership-ec/cog-mothership-user"     : "~3.3",
-		"mothership-ec/cog-mothership-cms"      : "~3.0",
-		"mothership-ec/cog-mothership-reports"  : "~1.0"
+		"mothership-ec/cog-mothership-user"    : "~4.0",
+		"mothership-ec/cog-mothership-cms"     : "~4.0",
+		"mothership-ec/cog-mothership-reports" : "~2.0"
 	},
 	"suggest": {
 	},
