@@ -16,7 +16,6 @@ class Collection extends \ArrayObject
 	{
 		$installers = [
 			'ecommerce' => new EcommerceInstaller,
-			'cms'       => new CmsInstaller,
 		];
 
 		parent::__construct($installers);

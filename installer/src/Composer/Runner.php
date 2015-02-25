@@ -91,7 +91,7 @@ class Runner
 
 		$this->_info->info('Running `' . $shCommand . '`, this may take a while');
 		if (in_array($command, $this->_createVendor)) {
-			$this->_info->info('Please note that Composer will show warnings until `message\cog` has been installed. Do not worry about these messages');
+			$this->_info->info('Please note that Composer will show warnings until `mothership-ec\cog` has been installed. Do not worry about these messages');
 		}
 		ShellCommand::run($shCommand);
 

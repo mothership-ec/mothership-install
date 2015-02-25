@@ -11,6 +11,6 @@ class CmsTheme implements ThemeInterface
 
 	public function getGitRepo()
 	{
-		return 'git@github.com:messagedigital/mothership-skeleton-theme.git';
+		return 'https://github.com/mothership-ec/mothership-skeleton-theme.git';
 	}
 }
