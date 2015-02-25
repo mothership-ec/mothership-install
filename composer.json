@@ -1,13 +1,13 @@
 {
-	"name": "message/mothership-install",
+	"name": "mothership-ec/mothership-install",
 	"description": "Installation tool for setting up new Mothership sites",
 	"keywords": ["mothership", "installer", "install", "cog"],
-	"homepage": "http://message.co.uk",
-	"license": "proprietary",
+	"homepage": "http://mothership.ec",
+	"license": "GPL-3.0+",
 	"authors": [
 		{
-			"name" : "The Message Development Team",
-			"email": "dev@message.co.uk"
+			"name" : "The Mothership Development Team",
+			"email": "dev@mothership.ec"
 		}
 	],
 	"support": {
