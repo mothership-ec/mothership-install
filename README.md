@@ -82,9 +82,6 @@ There are three types of options that the installer takes - the `install type`, 
 	+ Vouchers
 	+ Returns
 	+ Reports
-+ `cms`
-    + CMS
-    + Reports
 
 #### Commands
 + `install` - This is the default option. It requires that the `install type` has been set to be recognised. This option will install the site.
@@ -106,7 +103,7 @@ To compile the installer from source, first you need to clone this repo, run `co
 This will delete any existing file named `mothership.phar` in the `build` directory and create a new one from the source code.
 
 ## TODO
-+ More installation types e.g. EPOS, Minimal etc.
++ More installation types e.g. CMS, EPOS, Minimal etc.
 + Add more command options e.g. self-update, uninstall etc.
 + Ability to set a custom theme
 + Windows compatibility
