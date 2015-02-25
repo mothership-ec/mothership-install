@@ -11,7 +11,7 @@
 		}
 	],
 	"support": {
-		"issues": "https://github.com/messagedigital/mothership-install/issues"
+		"issues": "https://github.com/mothership-ec/mothership-install/issues"
 	},
 	"autoload": {
 		"psr-4": {
