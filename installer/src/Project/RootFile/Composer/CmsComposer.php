@@ -29,18 +29,11 @@ class CmsComposer extends AbstractComposer
 	{
 		return <<<'EOD'
 {
-	"repositories": [
-		{
-			"type": "composer",
-			"url" : "http://packages.message.co.uk"
-		}
-	],
 	"require": {
 
-		"message/cog-mothership-user"     : "~3.3",
-		"message/cog-mothership-cms"      : "~3.0",
-		"message/cog-mothership-reports"  : "~1.0",
-		"message/twitter"                 : "~1.0"
+		"mothership-ec/cog-mothership-user"     : "~3.3",
+		"mothership-ec/cog-mothership-cms"      : "~3.0",
+		"mothership-ec/cog-mothership-reports"  : "~1.0"
 	},
 	"suggest": {
 	},

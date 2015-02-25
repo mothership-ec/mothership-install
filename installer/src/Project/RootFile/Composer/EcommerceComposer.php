@@ -29,27 +29,14 @@ class EcommerceComposer extends AbstractComposer
 	{
 		return <<<'EOD'
 {
-	"repositories": [
-		{
-			"type": "composer",
-			"url" : "http://packages.message.co.uk"
-		}
-	],
 	"require": {
-		"message/cog-mothership-user"     : "~3.3",
-		"message/cog-mothership-cms"      : "~3.0",
-		"message/cog-mothership-ecommerce": "~2.2",
-		"message/cog-mothership-discount" : "~1.3",
-		"message/cog-mothership-returns"  : "~4.0",
-		"message/cog-mothership-voucher"  : "~1.3",
-		"message/cog-mothership-reports"  : "~1.0",
-		"message/twitter"                 : "~1.0"
-	},
-	"suggest": {
-		"message/cog-mothership-stripe" : "Allows integration of Stripe payment gateway",
-		"message/cog-mothership-epos"   : "EPOS module for Mothership sites, allow synchronised shop and online sales",
-		"message/cog-mothership-fedex"  : "Allows integration of Fedex dispatch methods",
-		"message/cog-mothership-mailing": "Allows synchronisation with major mailing list providers"
+		"mothership-ec/cog-mothership-user"     : "~4.0",
+		"mothership-ec/cog-mothership-cms"      : "~4.0",
+		"mothership-ec/cog-mothership-ecommerce": "~3.0",
+		"mothership-ec/cog-mothership-discount" : "~2.0",
+		"mothership-ec/cog-mothership-returns"  : "~5.0",
+		"mothership-ec/cog-mothership-voucher"  : "~2.0",
+		"mothership-ec/cog-mothership-reports"  : "~2.0"
 	},
 	"config": {
 		"bin-dir": "bin"

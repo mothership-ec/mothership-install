@@ -19,7 +19,6 @@ class Collection extends \ArrayObject
 		$rootFiles = [
 			'autoloader' => new AutoloaderRootFile,
 			'bootstrap'  => new BootstrapRootFile,
-			'gitignore'  => new GitignoreRootFile,
 			'namespaces' => new NamespacesRootFile,
 		];
 
