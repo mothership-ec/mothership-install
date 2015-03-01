@@ -34,6 +34,8 @@ To run the installer, run in the Terminal:
 $ php <path to>mothership.phar <install type> <command> --<option>=<value>
 ```
 
+**Note:** You must run install the application in an empty directory. The download of the skeleton theme will fail otherwise (see https://github.com/mothership-ec/mothership-install/issues/5)
+
 If you are running from source, you will need to run the `cli.php` file within the repo.
 
 The script will continue to run until Mothership has been fully installed. However, it does require user interaction in order to complete the installation.
