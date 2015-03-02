@@ -4,6 +4,7 @@ namespace Message\Mothership\Install\Project\Config;
 
 use Message\Mothership\Install\FileSystem\DirectoryResolver;
 use Message\Mothership\Install\Output\QuestionOutput;
+use Message\Mothership\Install\Output\InfoOutput;
 
 use Symfony\Component\Yaml\Yaml;
 

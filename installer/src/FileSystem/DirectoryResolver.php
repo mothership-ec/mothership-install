@@ -145,6 +145,30 @@ class DirectoryResolver
 	}
 
 	/**
+	 * Check to see if a directory is empty
+	 *
+	 * @param $path
+	 *
+	 * @return bool
+	 */
+	public function isEmpty($path)
+	{
+		$path = $this->getAbsolute($path);
+
+		if ($this->exists($path)) {
+			$handle = opendir($path);
+
+			while (false !== ($entry = readdir($handle))) {
+				if ($entry != "." && $entry != "..") {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Get absolute path of directory
 	 *
 	 * @param string $path      Path of directory

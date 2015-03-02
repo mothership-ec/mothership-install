@@ -5,6 +5,7 @@ namespace Message\Mothership\Install\Project\Init;
 use Message\Mothership\Install\Bin\Runner as BinRunner;
 use Message\Mothership\Install\Project\Config\App\Config as AppConfig;
 use Message\Mothership\Install\Project\Config\Database\Config as DbConfig;
+use Message\Mothership\Install\Project\Config\Exception\ConfigException;
 use Message\Mothership\Install\Project\Database\Install as DbInstall;
 use Message\Mothership\Install\Output\QuestionOutput;
 use Message\Mothership\Install\Project\PostInstall\File\Collection as PostInstallFiles;
@@ -88,6 +89,7 @@ class Initialiser
 	public function init($path)
 	{
 		$this->_info->heading('Initialising Mothership installation');
+
 		$this->_appConfig->askForDetails($path);
 
 		$this->_dbConfig->askForDetails($path);
@@ -103,7 +105,7 @@ class Initialiser
 
 		$this->_binRunner->run($path, 'task:run user:create_admin');
 
-		$this->_info->heading('Initialisation complete! Navigate to `[your URL]/admin` in your browser to start adding content');
+		$this->_info->heading('Initialisation complete! Navigate to `[your URL]/admin` in your browser to start adding content. Be sure to check out http://wiki.mothership.ec and http://forum.mothership.ec for more help with setting up your Mothership site!');
 	}
 
 	/**
