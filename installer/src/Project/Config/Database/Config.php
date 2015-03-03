@@ -85,7 +85,7 @@ class Config extends AbstractConfig
 		$mysqlConn = 'mysql:host=' . $dbConfig[self::HOST] . ';dbname=' . $dbConfig[self::NAME];
 
 		try {
-			$pdo = new \PDO($mysqlConn, $dbConfig[self::USER], $dbConfig[self::PASS]);
+			$pdo = @new \PDO($mysqlConn, $dbConfig[self::USER], $dbConfig[self::PASS]);
 		} catch (\PDOException $e) {
 			throw new Exception\ConfigException('Install aborted, could not establish database connection. Message: ' . $e->getMessage());
 		} catch (\ErrorException $e) {
