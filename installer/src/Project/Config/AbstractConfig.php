@@ -2,6 +2,7 @@
 
 namespace Message\Mothership\Install\Project\Config;
 
+use Message\Mothership\Install\Exception\InstallFailedException;
 use Message\Mothership\Install\FileSystem\DirectoryResolver;
 use Message\Mothership\Install\Output\QuestionOutput;
 use Message\Mothership\Install\Output\InfoOutput;
@@ -40,9 +41,15 @@ abstract class AbstractConfig implements ConfigInterface
 	 */
 	public function getConfig($path)
 	{
-		return Yaml::parse(file_get_contents(
+		$config = @Yaml::parse(file_get_contents(
 			$this->_dirResolver->getAbsolute(rtrim($path, '/') . '/' . $this->getConfigPath())
 		));
+
+		if (!$config) {
+			throw new InstallFailedException('Could not load config file from `' . $path . '`');
+		}
+
+		return $config;
 	}
 
 	/**
