@@ -41,9 +41,9 @@ abstract class AbstractConfig implements ConfigInterface
 	 */
 	public function getConfig($path)
 	{
-		$config = @Yaml::parse(file_get_contents(
-			$this->_dirResolver->getAbsolute(rtrim($path, '/') . '/' . $this->getConfigPath())
-		));
+		$path = $this->_dirResolver->getAbsolute(rtrim($path, '/') . '/' . $this->getConfigPath());
+
+		$config = @Yaml::parse(file_get_contents($path));
 
 		if (!$config) {
 			throw new InstallFailedException('Could not load config file from `' . $path . '`');
