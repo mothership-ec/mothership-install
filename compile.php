@@ -25,8 +25,8 @@ try {
 		throw new \RuntimeException('Could not load task file');
 	}
 
+	$phar->setStub("#!/usr/bin/env php" . PHP_EOL . $phar->createDefaultStub($cliFile));
 	$phar->buildFromDirectory(__DIR__ . '/' . $source);
-	$phar->setStub($phar->createDefaultStub($cliFile));
 } catch (\Exception $e) {
 	echo $e->getMessage() . PHP_EOL;
 	echo $e->getTraceAsString() . PHP_EOL;
