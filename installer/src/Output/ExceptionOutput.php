@@ -47,7 +47,7 @@ class ExceptionOutput extends AbstractOutput
 	 */
 	private function _addExceptionLines()
 	{
-		$this->_addLine(get_class($this->_exception) . ' thrown: ' . $this->_exception->getMessage(), 'black', 'red');
+		$this->_addLine(get_class($this->_exception) . ' thrown: ' . $this->_exception->getMessage(), 'white', 'red');
 		$this->_addLine($this->_exception->getFile() . ' line ' . $this->_exception->getLine(), 'red');
 
 		if ($this->_exception instanceof Exception\OutputException) {

@@ -16,30 +16,6 @@ use Message\Mothership\Install\Project\Init\Initialiser;
  */
 
 try {
-
-	$memory = ini_get('memory_limit');
-
-	switch (substr($memory, -1)) {
-		case 'M':
-		case 'm':
-			$memory = (int) $memory * 1048576;
-			break;
-		case 'K':
-		case 'k':
-			$memory = (int) $memory * 1024;
-			break;
-		case 'G':
-		case 'g':
-			$memory = (int) $memory * 1073741824;
-			break;
-		default:
-			break;
-	}
-
-	if ($memory < 536870912) {
-		$iniSet = ini_set('memory_limit', 536870912);
-	}
-
 	$autoloader = require_once(__DIR__ . '/autoloader.php');
 
 	$optionParser = new OptionParser($argv);

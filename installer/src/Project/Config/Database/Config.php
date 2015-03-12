@@ -2,6 +2,7 @@
 
 namespace Message\Mothership\Install\Project\Config\Database;
 
+use Message\Mothership\Install\Exception\InstallFailedException;
 use Message\Mothership\Install\Project\Config\Exception;
 use Message\Mothership\Install\Project\Config\AbstractConfig;
 
@@ -22,6 +23,13 @@ class Config extends AbstractConfig
 	const PASS    = 'pass';
 	const NAME    = 'name';
 	const CHARSET = 'charset';
+
+	private $_required = [
+		self::HOST,
+		self::USER,
+		self::NAME,
+		self::CHARSET,
+	];
 
 	/**
 	 * {@inheritDoc}
@@ -68,17 +76,24 @@ class Config extends AbstractConfig
 	 */
 	public function validateConfig(array $dbConfig)
 	{
-		$required = [
-			self::HOST,
-			self::USER,
-			self::PASS,
-			self::CHARSET,
-		];
-
-		foreach ($required as $key) {
+		foreach ($this->_required as $key) {
 			if (!array_key_exists($key, $dbConfig) || !$dbConfig[$key]) {
 				throw new Exception\ConfigException('Database details are missing `' . $key . '` option');
 			}
+		}
+
+		$mysqlConn = 'mysql:host=' . $dbConfig[self::HOST] . ';dbname=' . $dbConfig[self::NAME];
+
+		try {
+			$pdo = @new \PDO($mysqlConn, $dbConfig[self::USER], $dbConfig[self::PASS]);
+		} catch (\PDOException $e) {
+			throw new Exception\ConfigException('Install aborted, could not establish database connection. Message: ' . $e->getMessage());
+		} catch (\ErrorException $e) {
+			throw new Exception\ConfigException('Install aborted, an error was thrown. Message: ' . $e->getMessage());
+		}
+
+		if ($pdo->query("SHOW TABLES IN " . $dbConfig[self::NAME])->rowCount() > 0) {
+			throw new InstallFailedException('Database schema must be empty!');
 		}
 	}
 }
