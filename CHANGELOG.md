@@ -1,5 +1,9 @@
 # Change log
 
+## 0.0.3
+
+- Fix broken bash statement, installer can now be run as an executable
+
 ## 0.0.2
 
 - Escape if directory is not empty
