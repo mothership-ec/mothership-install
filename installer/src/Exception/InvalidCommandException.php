@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\Exception;
+namespace Mothership\Install\Exception;
 
 /**
  * Class InvalidCommandException
- * @package Message\Mothership\Install\Exception
+ * @package Mothership\Install\Exception
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

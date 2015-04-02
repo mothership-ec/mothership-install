@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\Project;
+namespace Mothership\Install\Project;
 
 /**
  * Class Types
- * @package Message\Mothership\Install\Project
+ * @package Mothership\Install\Project
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

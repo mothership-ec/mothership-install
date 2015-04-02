@@ -1,12 +1,12 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Installer;
+namespace Mothership\Install\Project\Installer;
 
-use Message\Mothership\Install\Composer\Package\PackageInterface;
+use Mothership\Install\Composer\Package\PackageInterface;
 
 /**
  * Interface InstallerInterface
- * @package Message\Mothership\Install\Project\Installer
+ * @package Mothership\Install\Project\Installer
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

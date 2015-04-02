@@ -1,12 +1,12 @@
 <?php
 
-namespace Message\Mothership\Install\Bin;
+namespace Mothership\Install\Bin;
 
-use Message\Mothership\Install\FileSystem;
+use Mothership\Install\FileSystem;
 
 /**
  * Class Validator
- * @package Message\Mothership\Install\Bin
+ * @package Mothership\Install\Bin
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

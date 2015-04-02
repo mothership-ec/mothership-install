@@ -1,14 +1,14 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Config\Database;
+namespace Mothership\Install\Project\Config\Database;
 
-use Message\Mothership\Install\Exception\InstallFailedException;
-use Message\Mothership\Install\Project\Config\Exception;
-use Message\Mothership\Install\Project\Config\AbstractConfig;
+use Mothership\Install\Exception\InstallFailedException;
+use Mothership\Install\Project\Config\Exception;
+use Mothership\Install\Project\Config\AbstractConfig;
 
 /**
  * Class Config
- * @package Message\Mothership\Install\Project\Config\Database
+ * @package Mothership\Install\Project\Config\Database
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

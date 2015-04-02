@@ -1,13 +1,13 @@
 <?php
 
-namespace Message\Mothership\Install\Composer;
+namespace Mothership\Install\Composer;
 
-use Message\Mothership\Install\Command\ShellCommand;
-use Message\Mothership\Install\Output\InfoOutput;
+use Mothership\Install\Command\ShellCommand;
+use Mothership\Install\Output\InfoOutput;
 
 /**
  * Class Runner
- * @package Message\Mothership\Install\Composer
+ * @package Mothership\Install\Composer
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
@@ -16,7 +16,7 @@ use Message\Mothership\Install\Output\InfoOutput;
 class Runner
 {
 	/**
-	 * @var \Message\Mothership\Install\Output\InfoOutput
+	 * @var \Mothership\Install\Output\InfoOutput
 	 */
 	private $_info;
 
@@ -40,7 +40,7 @@ class Runner
 	 * @throws Exception\InvalidComposerException
 	 * @throws Exception\ComposerException
 	 */
-	public function createProject(Package\PackageInterface $package, $composerPath = null)
+	public function createProject(Package\PackageInterface $package, $installPath = null, $composerPath = null)
 	{
 		$composer = 'composer';
 
@@ -59,16 +59,23 @@ class Runner
 
 		$this->selfUpdate($composer);
 
-		chdir($composerPath);
-		$shCommand = $composer . ' create-project ' . $package->getName() . ($this->_debugMode === true ? ' --verbose' : '');
+		if ($installPath) {
+			$installPath = rtrim($installPath, '/');
+			if (!is_dir($installPath)) {
+				throw new Exception\InvalidComposerException('Could not install Mothership to `' . $installPath . '` as it does not exist!`');
+			}
+			chdir($installPath);
+		}
+
+		$shCommand = $composer . ' create-project ' . $package->getName() . ' ' . ($installPath ?: '.') . ' 0 ' . ($this->_debugMode === true ? ' --verbose' : '');
 
 		$this->_info->info('Running `' . $shCommand . '`, this may take a while');
 		$this->_info->info('Please note that Composer will show warnings until `mothership-ec\cog` has been installed. Do not worry about these messages, Composer has been set to create config files once Cog has been installed.');
 
 		ShellCommand::run($shCommand);
 
-		if (!is_dir($composerPath . '/vendor')) {
-			throw new Exception\ComposerException('Composer could not create vendor directory', $this->_diagnose($composerPath, $composer));
+		if (!is_dir(($installPath ? $installPath . '/' : '') . 'vendor')) {
+			throw new Exception\ComposerException('Composer could not create vendor directory', $this->_diagnose($composer));
 		}
 	}
 
@@ -104,14 +111,12 @@ class Runner
 	/**
 	 * Run Composer's diagnostics to debug any problems
 	 *
-	 * @param string $path           Path of installation
 	 * @param string $composer       Composer command
 	 *
 	 * @return mixed
 	 */
-	private function _diagnose($path, $composer)
+	private function _diagnose($composer)
 	{
-		chdir($path);
 		ShellCommand::exec($composer . ' diagnose', $output);
 
 		return $output;

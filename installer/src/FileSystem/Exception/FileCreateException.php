@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\FileSystem\Exception;
+namespace Mothership\Install\FileSystem\Exception;
 
 /**
  * Class FileCreateException
- * @package Message\Mothership\Install\FileSystem\Exception
+ * @package Mothership\Install\FileSystem\Exception
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

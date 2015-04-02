@@ -1,6 +1,6 @@
 <?php
 
-namespace Message\Mothership\Install\Exception;
+namespace Mothership\Install\Exception;
 
 class OutputException extends \LogicException
 {

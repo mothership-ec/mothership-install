@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\FileSystem;
+namespace Mothership\Install\FileSystem;
 
 /**
  * Class File
- * @package Message\Mothership\Install\FileSystem
+ * @package Mothership\Install\FileSystem
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

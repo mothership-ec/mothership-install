@@ -1,13 +1,13 @@
 <?php
 
-namespace Message\Mothership\Install\FileSystem;
+namespace Mothership\Install\FileSystem;
 
-use Message\Mothership\Install\System\SystemResolver;
-use Message\Mothership\Install\Command\ShellCommand;
+use Mothership\Install\System\SystemResolver;
+use Mothership\Install\Command\ShellCommand;
 
 /**
  * Class DirectoryResolver
- * @package Message\Mothership\Install\FileSystem
+ * @package Mothership\Install\FileSystem
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
@@ -18,7 +18,7 @@ use Message\Mothership\Install\Command\ShellCommand;
 class DirectoryResolver
 {
 	/**
-	 * @var \Message\Mothership\Install\System\SystemResolver
+	 * @var \Mothership\Install\System\SystemResolver
 	 */
 	private $_sysResolver;
 

@@ -1,18 +1,18 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Installer;
+namespace Mothership\Install\Project\Installer;
 
-use Message\Mothership\Install\FileSystem;
-use Message\Mothership\Install\Command\OptionParser;
-use Message\Mothership\Install\Project\Theme\Downloader as ThemeDownloader;
-use Message\Mothership\Install\Project\RootFile\Collection as RootFileCollection;
-use Message\Mothership\Install\Project\Directory\Collection as DirectoryCollection;
-use Message\Mothership\Install\Composer\Runner as ComposerRunner;
-use Message\Mothership\Install\Output\InfoOutput;
+use Mothership\Install\FileSystem;
+use Mothership\Install\Command\OptionParser;
+use Mothership\Install\Project\Theme\Downloader as ThemeDownloader;
+use Mothership\Install\Project\RootFile\Collection as RootFileCollection;
+use Mothership\Install\Project\Directory\Collection as DirectoryCollection;
+use Mothership\Install\Composer\Runner as ComposerRunner;
+use Mothership\Install\Output\InfoOutput;
 
 /**
  * Class AbstractInstaller
- * @package Message\Mothership\Install\Project\Installer
+ * @package Mothership\Install\Project\Installer
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
@@ -21,27 +21,22 @@ use Message\Mothership\Install\Output\InfoOutput;
 abstract class AbstractInstaller implements InstallerInterface
 {
 	/**
-	 * @var \Message\Mothership\Install\FileSystem\DirectoryResolver
+	 * @var \Mothership\Install\FileSystem\DirectoryResolver
 	 */
 	private $_dirResolver;
 
 	/**
-	 * @var \Message\Mothership\Install\FileSystem\FileResolver
+	 * @var \Mothership\Install\FileSystem\FileResolver
 	 */
 	private $_fileResolver;
 
 	/**
-	 * @var \Message\Mothership\Install\Project\Theme\Downloader
-	 */
-	private $_themeDownloader;
-
-	/**
-	 * @var \Message\Mothership\Install\Project\Directory\Collection
+	 * @var \Mothership\Install\Project\Directory\Collection
 	 */
 	private $_directories;
 
 	/**
-	 * @var \Message\Mothership\Install\Composer\Runner
+	 * @var \Mothership\Install\Composer\Runner
 	 */
 	private $_composer;
 
@@ -54,8 +49,6 @@ abstract class AbstractInstaller implements InstallerInterface
 	{
 		$this->_dirResolver     = new FileSystem\DirectoryResolver;
 		$this->_fileResolver    = new FileSystem\FileResolver;
-		$this->_themeDownloader = new ThemeDownloader;
-		$this->_rootFiles       = new RootFileCollection;
 		$this->_directories     = new DirectoryCollection;
 		$this->_composer        = new ComposerRunner;
 		$this->_info            = new InfoOutput;
@@ -73,49 +66,13 @@ abstract class AbstractInstaller implements InstallerInterface
 			$this->_options[OptionParser::PATH] : $this->_dirResolver->current();
 		$path = $this->_dirResolver->getAbsolute($path);
 
-		$this->_info->heading('Installing a Mothership ' . ucfirst($this->_options[OptionParser::TYPE] . ' site to ' . $path));
+		$this->_info->heading('Installing a Mothership to ' . $path);
 
-		$this->_themeDownloader->download($this->getTheme(), $path);
-		$this->_saveRootFiles($path);
-		$this->_saveDirectories($path);
-
-		if (!empty($options[OptionParser::COMPOSER])) {
-			$this->_composer->install($path, $options[OptionParser::COMPOSER]);
-		} else {
-			$this->_composer->install($path);
-		}
+		// If composer path is set in options, use that, otherwise default to global installation
+		$composerPath = !empty($options[OptionParser::COMPOSER]) ? $options[OptionParser::COMPOSER] : null;
+		$installPath  = !empty($options[OptionParser::PATH]) ? $options[OptionParser::PATH] : null;
+		$this->_composer->createProject($this->getPackage(), $installPath, $composerPath);
 
 		$this->_info->heading('Mothership filesystem set up complete!');
-	}
-
-	/**
-	 * Save the root files registered in the RootFile\Collection class
-	 *
-	 * @param string $path
-	 */
-	private function _saveRootFiles($path)
-	{
-		$directory = $this->_dirResolver->get($path, !empty($this->_options[OptionParser::FORCE]));
-
-		foreach ($this->_rootFiles as $file) {
-			$this->_fileResolver->create($file, $directory);
-		}
-
-		$composer = $this->getComposerTemplate();
-		$composer = new FileSystem\File($composer->getFilename(), $composer->getContents());
-
-		$this->_fileResolver->create($composer, $directory);
-	}
-
-	/**
-	 * Create the directories registered in the Directory\Collection class
-	 *
-	 * @param string $path
-	 */
-	private function _saveDirectories($path)
-	{
-		foreach ($this->_directories as $dir) {
-			$this->_dirResolver->create($path . '/' . $dir->getPath(), $dir->getPermission());
-		}
 	}
 }

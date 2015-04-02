@@ -1,12 +1,12 @@
 <?php
 
-use Message\Mothership\Install\Exception\InvalidCommandException;
-use Message\Mothership\Install\Command\Commands;
-use Message\Mothership\Install\Command\OptionParser;
-use Message\Mothership\Install\FileSystem\DirectoryResolver;
-use Message\Mothership\Install\Output;
-use Message\Mothership\Install\Project\Installer\Collection as InstallCollection;
-use Message\Mothership\Install\Project\Init\Initialiser;
+use Mothership\Install\Exception\InvalidCommandException;
+use Mothership\Install\Command\Commands;
+use Mothership\Install\Command\OptionParser;
+use Mothership\Install\FileSystem\DirectoryResolver;
+use Mothership\Install\Output;
+use Mothership\Install\Project\Installer\Collection as InstallCollection;
+use Mothership\Install\Project\Init\Initialiser;
 
 /**
  * Main script for setting up a Mothership installation

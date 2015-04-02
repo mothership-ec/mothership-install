@@ -1,12 +1,12 @@
 <?php
 
-namespace Message\Mothership\Install\Composer\Exception;
+namespace Mothership\Install\Composer\Exception;
 
-use Message\Mothership\Install\Exception\OutputException;
+use Mothership\Install\Exception\OutputException;
 
 /**
  * Class ComposerException
- * @package Message\Mothership\Install\Composer\Exception
+ * @package Mothership\Install\Composer\Exception
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

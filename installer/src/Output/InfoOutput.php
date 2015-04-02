@@ -1,6 +1,6 @@
 <?php
 
-namespace Message\Mothership\Install\Output;
+namespace Mothership\Install\Output;
 
 class InfoOutput extends AbstractOutput
 {

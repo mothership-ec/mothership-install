@@ -1,13 +1,13 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Installer;
+namespace Mothership\Install\Project\Installer;
 
-use Message\Mothership\Install\Project\Types;
-use Message\Mothership\Install\Composer\Package\MothershipPackage;
+use Mothership\Install\Project\Types;
+use Mothership\Install\Composer\Package\MothershipPackage;
 
 /**
  * Class EcommerceInstaller
- * @package Message\Mothership\Install\Project\Installer
+ * @package Mothership\Install\Project\Installer
  *
  * @author  Thomas Marchant <thomas@message.co.uk>
  *

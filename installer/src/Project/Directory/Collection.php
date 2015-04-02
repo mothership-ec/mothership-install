@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Directory;
+namespace Mothership\Install\Project\Directory;
 
 /**
  * Class Collection
- * @package Message\Mothership\Install\Project\Directory
+ * @package Mothership\Install\Project\Directory
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

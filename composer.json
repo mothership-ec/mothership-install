@@ -15,8 +15,8 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Message\\Mothership\\Install\\"      : "installer/src",
-			"Message\\Mothership\\Install\\Test\\": "tests"
+			"Mothership\\Install\\"      : "installer/src",
+			"Mothership\\Install\\Test\\": "tests"
 		}
 	},
 	"config": {

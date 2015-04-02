@@ -1,17 +1,17 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Config;
+namespace Mothership\Install\Project\Config;
 
-use Message\Mothership\Install\Exception\InstallFailedException;
-use Message\Mothership\Install\FileSystem\DirectoryResolver;
-use Message\Mothership\Install\Output\QuestionOutput;
-use Message\Mothership\Install\Output\InfoOutput;
+use Mothership\Install\Exception\InstallFailedException;
+use Mothership\Install\FileSystem\DirectoryResolver;
+use Mothership\Install\Output\QuestionOutput;
+use Mothership\Install\Output\InfoOutput;
 
 use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class AbstractConfig
- * @package Message\Mothership\Install\Project\Config
+ * @package Mothership\Install\Project\Config
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
@@ -21,12 +21,12 @@ use Symfony\Component\Yaml\Yaml;
 abstract class AbstractConfig implements ConfigInterface
 {
 	/**
-	 * @var \Message\Mothership\Install\FileSystem\DirectoryResolver
+	 * @var \Mothership\Install\FileSystem\DirectoryResolver
 	 */
 	protected $_dirResolver;
 
 	/**
-	 * @var \Message\Mothership\Install\Output\QuestionOutput
+	 * @var \Mothership\Install\Output\QuestionOutput
 	 */
 	protected $_question;
 

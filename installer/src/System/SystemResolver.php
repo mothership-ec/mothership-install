@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\System;
+namespace Mothership\Install\System;
 
 /**
  * Class SystemResolver
- * @package Message\Mothership\Install\System
+ * @package Mothership\Install\System
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
