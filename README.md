@@ -2,7 +2,7 @@
 
 ## System requirements
 
-To set up Mothership using the installer, you must have the following:
+To set up <a href="http://mothership.ec">Mothership</a> using the installer, you must have the following:
 
 + **PHP** 5.4.0 or higher
 	+ **PHP intl extention** (see <a href="http://php.net/manual/en/intl.setup.php">http://php.net/manual/en/intl.setup.php</a>)
