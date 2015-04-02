@@ -31,7 +31,7 @@ You will also need to set up a MySQL root user and blank database before running
 To run the installer, run in the Terminal:
 
 ```
-$ php <path to>mothership.phar <install type> <command> --<option>=<value>
+$ php <path to>mothership.phar <path> --<option>=<value>
 ```
 
 **Note:** You must run install the application in an empty directory. The download of the skeleton theme will fail otherwise (see https://github.com/mothership-ec/mothership-install/issues/5)
@@ -42,11 +42,7 @@ The script will continue to run until Mothership has been fully installed. Howev
 
 The installer will run through the following steps:
 
-+ Download the basic theme using Git
-+ Create files that need to exist in the root directory of the Mothership installation, including the appropriate `composer.json` dependency configuration file
-+ Create necessary directories in the Mothership installation
-+ Updates the installed version of Composer
-+ Run the `composer install` command
++ Download a basic Mothership installation using Composer's `create-project` command
 	+ **Note:** This may take a while. You may also see error messages flash up from Composer that read: `
 Class Message\Cog\Config\FixtureManager is not autoloadable, can not call post-package-install script` - Do not worry, this is simply because of a command that Composer will attempt to run after each dependency is installed, but can only be run once the `Cog` framework is installed. The command itself is used to copy configuration files over from the individual Mothership modules into the installation
 + **Ask the user for the following details about the installation:**
@@ -71,29 +67,12 @@ Class Message\Cog\Config\FixtureManager is not autoloadable, can not call post-p
 
 ...and then you're done! You should be able to navigate to your installation in the browser and log in to `[site url]/admin`.
 
-
 ### Options
 
-There are three types of options that the installer takes - the `install type`, the `command` (the first command after the ), and a regular `option`. The accepted options are the following:
-
-#### Install types
-+ `ecommerce` - This is the default option. This installs an ecommerce site with the following modules:
-	+ Ecommerce
-	+ CMS
-	+ Discounts
-	+ Vouchers
-	+ Returns
-	+ Reports
-
-#### Commands
-+ `install` - This is the default option. It requires that the `install type` has been set to be recognised. This option will install the site.
-
-#### Options
 These options can be parsed into the script anywhere after the path to the `mothership.phar` file, and follow a format of `--[option name]=[value]`. If no `value` is set, it will default to `true`.
 
 You can pass the script the following options:
 
-+ `path` - This is the path of the installation. If this option is not set, it will default to the current working directory.
 + `composer` - This is the path to the `composer.phar` installation (or `bin/composer` if you are running Composer from source). If this is not set, the installer will assume that Composer is install globally.
 + `force` - This option forces the creation of the path directory if it does not already exist. It does not require a value, and is disabled by default.
 + `debug` - This enables 'debug mode', which provides more information if the script fails for any reason. It does not require a value, and is disabled by default.
@@ -105,8 +84,6 @@ To compile the installer from source, first you need to clone this repo, run `co
 This will delete any existing file named `mothership.phar` in the `build` directory and create a new one from the source code.
 
 ## TODO
-+ More installation types e.g. CMS, EPOS, Minimal etc.
 + Add more command options e.g. self-update, uninstall etc.
-+ Ability to set a custom theme
 + Windows compatibility
 
