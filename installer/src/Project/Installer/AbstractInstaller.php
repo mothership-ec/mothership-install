@@ -36,11 +36,6 @@ abstract class AbstractInstaller implements InstallerInterface
 	private $_themeDownloader;
 
 	/**
-	 * @var \Message\Mothership\Install\Project\RootFile\Collection
-	 */
-	private $_rootFiles;
-
-	/**
 	 * @var \Message\Mothership\Install\Project\Directory\Collection
 	 */
 	private $_directories;

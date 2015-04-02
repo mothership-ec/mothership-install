@@ -49,11 +49,6 @@ class Initialiser
 	private $_binRunner;
 
 	/**
-	 * @var \Message\Mothership\Install\Project\PostInstall\File\Collection
-	 */
-	private $_postInstallFiles;
-
-	/**
 	 * @var \Message\Mothership\Install\FileSystem\DirectoryResolver
 	 */
 	private $_dirResolver;
@@ -75,7 +70,6 @@ class Initialiser
 		$this->_dbInstall        = new DbInstall;
 		$this->_question         = new QuestionOutput;
 		$this->_binRunner        = new BinRunner;
-		$this->_postInstallFiles = new PostInstallFiles;
 		$this->_dirResolver      = new FileSystem\DirectoryResolver;
 		$this->_fileResolver     = new FileSystem\FileResolver;
 		$this->_info             = new InfoOutput;
@@ -99,26 +93,11 @@ class Initialiser
 		$this->_binRunner->run($path, 'asset:dump');
 		$this->_binRunner->run($path, 'asset:generate');
 
-		$this->_createPostInstallFiles();
-
 		$this->_dirResolver->chmodR('public', 0777);
 
 		$this->_binRunner->run($path, 'task:run user:create_admin');
 
 		$this->_info->heading('Initialisation complete! Navigate to `[your URL]/admin` in your browser to start adding content. Be sure to check out http://wiki.mothership.ec and http://forum.mothership.ec for more help with setting up your Mothership site!');
 	}
-
-	/**
-	 * Create files that exist in directories that were created during the installation setup
-	 */
-	private function _createPostInstallFiles()
-	{
-		foreach ($this->_postInstallFiles as $file) {
-			$directory = $this->_dirResolver->get($file->getPath());
-			$file      = new FileSystem\File($file->getFilename(), $file->getContents());
-			$this->_fileResolver->create($file, $directory);
-		}
-	}
-
 
 }

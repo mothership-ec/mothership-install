@@ -3,14 +3,13 @@
 namespace Message\Mothership\Install\Project\Installer;
 
 use Message\Mothership\Install\Project\Types;
-use Message\Mothership\Install\Project\RootFile\Composer\EcommerceComposer;
-use Message\Mothership\Install\Project\Theme\EcommerceTheme;
+use Message\Mothership\Install\Composer\Package\MothershipPackage;
 
 /**
  * Class EcommerceInstaller
  * @package Message\Mothership\Install\Project\Installer
  *
- * @author Thomas Marchant <thomas@message.co.uk>
+ * @author  Thomas Marchant <thomas@message.co.uk>
  *
  * Installer for an Ecommerce site
  */
@@ -27,16 +26,8 @@ class EcommerceInstaller extends AbstractInstaller
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getTheme()
+	public function getPackage()
 	{
-		return new EcommerceTheme;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getComposerTemplate()
-	{
-		return new EcommerceComposer;
+		return new MothershipPackage;
 	}
 }

@@ -13,7 +13,6 @@ use Message\Mothership\Install\Project\Init\Initialiser;
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  */
-
 try {
 	$autoloader = require_once(__DIR__ . '/autoloader.php');
 
