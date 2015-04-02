@@ -69,8 +69,8 @@ abstract class AbstractInstaller implements InstallerInterface
 		$this->_info->heading('Installing a Mothership to ' . $path);
 
 		// If composer path is set in options, use that, otherwise default to global installation
-		$composerPath = !empty($options[OptionParser::COMPOSER]) ? $options[OptionParser::COMPOSER] : null;
-		$installPath  = !empty($options[OptionParser::PATH]) ? $options[OptionParser::PATH] : null;
+		$composerPath = !empty($options[OptionParser::COMPOSER]) ? $this->_dirResolver->getAbsolute($options[OptionParser::COMPOSER]) : null;
+		$installPath  = !empty($options[OptionParser::PATH]) ? $this->_dirResolver->getAbsolute($options[OptionParser::PATH]) : null;
 		$this->_composer->createProject($this->getPackage(), $installPath, $composerPath);
 
 		$this->_info->heading('Mothership filesystem set up complete!');
