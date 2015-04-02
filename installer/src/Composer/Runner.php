@@ -67,7 +67,7 @@ class Runner
 			chdir($installPath);
 		}
 
-		$shCommand = $composer . ' create-project ' . $package->getName() . ' ' . ($installPath ?: '.') . ' 0 ' . ($this->_debugMode === true ? ' --verbose' : '');
+		$shCommand = $composer . ' create-project ' . $package->getName() . ' ' . ($installPath ?: '.') . ' * ' . ($this->_debugMode === true ? ' --verbose' : '');
 
 		$this->_info->info('Running `' . $shCommand . '`, this may take a while');
 		$this->_info->info('Please note that Composer will show warnings until `mothership-ec\cog` has been installed. Do not worry about these messages, Composer has been set to create config files once Cog has been installed.');
