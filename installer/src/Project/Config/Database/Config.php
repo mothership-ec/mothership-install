@@ -88,7 +88,7 @@ class Config extends AbstractConfig
 		try {
 			$pdo = @new \PDO($mysqlConn, $dbConfig[self::USER], $dbConfig[self::PASS]);
 		} catch (\PDOException $e) {
-			throw new Exception\ConfigException('Could not establish database connection. Please revise the details and try again.');
+			throw new Exception\ConfigException('Could not establish database connection. Please revise details and try again.');
 		} catch (\ErrorException $e) {
 			throw new InstallFailedException('Install aborted, an error was thrown. Message: ' . $e->getMessage());
 		}
