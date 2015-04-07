@@ -1,13 +1,13 @@
 <?php
 
-namespace Message\Mothership\Install\Bin;
+namespace Mothership\Install\Bin;
 
-use Message\Mothership\Install\Command\ShellCommand;
-use Message\Mothership\Install\FileSystem\DirectoryResolver;
+use Mothership\Install\Command\ShellCommand;
+use Mothership\Install\FileSystem\DirectoryResolver;
 
 /**
  * Class Runner
- * @package Message\Mothership\Install\Bin
+ * @package Mothership\Install\Bin
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
@@ -21,7 +21,7 @@ class Runner
 	private $_validator;
 
 	/**
-	 * @var \Message\Mothership\Install\FileSystem\DirectoryResolver
+	 * @var \Mothership\Install\FileSystem\DirectoryResolver
 	 */
 	private $_dirResolver;
 

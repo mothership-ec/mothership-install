@@ -1,12 +1,12 @@
 <?php
 
-namespace Message\Mothership\Install\Command;
+namespace Mothership\Install\Command;
 
-use Message\Mothership\Install\Project\Types;
+use Mothership\Install\Project\Types;
 
 /**
  * Class OptionParser
- * @package Message\Mothership\Install\Command
+ * @package Mothership\Install\Command
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
@@ -105,7 +105,16 @@ class OptionParser
 			}
 		}
 
-		$this->_parsedOptions[self::TYPE]    = array_key_exists(1, $this->_args) ? $this->_args[1] : Types::ECOMMERCE;
-		$this->_parsedOptions[self::COMMAND] = array_key_exists(2, $this->_args) ? $this->_args[2] : Commands::INSTALL;
+		if (array_key_exists(1, $this->_args)) {
+			$this->_parsedOptions[self::PATH] = $this->_args[1];
+		}
+
+		if (empty($this->_parsedOptions[self::TYPE])) {
+			$this->_parsedOptions[self::TYPE] = Types::ECOMMERCE;
+		}
+
+		if (empty($this->_parsedOptions[self::COMMAND])) {
+			$this->_parsedOptions[self::COMMAND] = Commands::INSTALL;
+		}
 	}
 }

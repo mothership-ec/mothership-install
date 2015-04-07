@@ -1,13 +1,13 @@
 <?php
 
-namespace Message\Mothership\Install\Output;
+namespace Mothership\Install\Output;
 
 use Colors\Color;
 use Colors\NoStyleFoundException;
 
 /**
  * Class Line
- * @package Message\Mothership\Install\Output
+ * @package Mothership\Install\Output
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

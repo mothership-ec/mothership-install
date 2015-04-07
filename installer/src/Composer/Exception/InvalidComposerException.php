@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\Composer\Exception;
+namespace Mothership\Install\Composer\Exception;
 
 /**
  * Class InvalidComposerException
- * @package Message\Mothership\Install\Composer\Exception
+ * @package Mothership\Install\Composer\Exception
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

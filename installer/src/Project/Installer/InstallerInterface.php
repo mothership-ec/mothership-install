@@ -1,10 +1,12 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Installer;
+namespace Mothership\Install\Project\Installer;
+
+use Mothership\Install\Composer\Package\PackageInterface;
 
 /**
  * Interface InstallerInterface
- * @package Message\Mothership\Install\Project\Installer
+ * @package Mothership\Install\Project\Installer
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
@@ -20,18 +22,11 @@ interface InstallerInterface
 	public function getName();
 
 	/**
-	 * Get ThemeInterface instance to determine the theme path and branch
+	 * Get the package to download as the basis for the project installation
 	 *
-	 * @return \Message\Mothership\Install\Project\Theme\ThemeInterface
+	 * @return PackageInterface
 	 */
-	public function getTheme();
-
-	/**
-	 * Get the contents for the `composer.json` file for this type of installation
-	 *
-	 * @return \Message\Mothership\Install\Project\RootFile\Composer\ComposerInterface
-	 */
-	public function getComposerTemplate();
+	public function getPackage();
 
 	/**
 	 * Run commands necessary to install the Mothership project.

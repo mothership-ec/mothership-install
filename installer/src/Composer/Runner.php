@@ -1,13 +1,13 @@
 <?php
 
-namespace Message\Mothership\Install\Composer;
+namespace Mothership\Install\Composer;
 
-use Message\Mothership\Install\Command\ShellCommand;
-use Message\Mothership\Install\Output\InfoOutput;
+use Mothership\Install\Command\ShellCommand;
+use Mothership\Install\Output\InfoOutput;
 
 /**
  * Class Runner
- * @package Message\Mothership\Install\Composer
+ * @package Mothership\Install\Composer
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
@@ -16,7 +16,7 @@ use Message\Mothership\Install\Output\InfoOutput;
 class Runner
 {
 	/**
-	 * @var \Message\Mothership\Install\Output\InfoOutput
+	 * @var \Mothership\Install\Output\InfoOutput
 	 */
 	private $_info;
 
@@ -25,78 +25,57 @@ class Runner
 	 */
 	private $_debugMode = false;
 
-	/**
-	 * List of allowed Composer commands from the `__call()` method
-	 *
-	 * @var array
-	 */
-	private $_commands = [
-		'up',
-		'install',
-		'dumpautoload',
-	];
-
-	/**
-	 * List of Composer commands that create a `vendor` directory
-	 *
-	 * @var array
-	 */
-	private $_createVendor = [
-		'up',
-		'install',
-	];
-
 	public function __construct()
 	{
 		$this->_info = new InfoOutput;
 	}
 
 	/**
-	 * Run a Composer command from the list above.
+	 * Run the Composer `create-project` command to download the installation from Packagist
 	 * If debug mode is enabled and an install fails, it will run Composer's diagnostics.
 	 *
 	 * Composer is automatically updated before any commands are run.
 	 *
-	 * @param string $command                           Composer command to run
-	 * @param array $args                               Arguments passed to method call. The first argument is the
-	 *                                                  only one that is used, and is the path to Composer if not
-	 *                                                  globally installed.
+	 * @param array $composerPath                       The path to Composer if not globally installed.
 	 * @throws Exception\InvalidComposerException
 	 * @throws Exception\ComposerException
 	 */
-	public function __call($command, $args)
+	public function createProject(Package\PackageInterface $package, $installPath = null, $composerPath = null)
 	{
-		if (!in_array($command, $this->_commands)) {
-			throw new Exception\InvalidComposerException('`' . $command . '` is not a supported command');
-		}
-
 		$composer = 'composer';
-		$path = rtrim(array_shift($args), '/');
 
-		if (!is_dir($path)) {
-			throw new Exception\InvalidComposerException('Could not change directory to `' . $path . '` as it does not exist!');
-		}
-		if (!file_exists($path . '/composer.json')) {
-			throw new Exception\InvalidComposerException('composer.json file missing in `' . $path . '`');
-		}
+		if (is_string($composerPath)) {
+			$composerPath = rtrim($composerPath, '/');
+			if (!is_dir($composerPath)) {
+				throw new Exception\InvalidComposerException('Could not change directory to `' . $composerPath . '` as it does not exist!');
+			}
 
-		if ($composerPath = array_shift($args)) {
-			$composer = $this->_getComposerCommand($composerPath);
+			if ($composerPath = array_shift($args)) {
+				$composer = $this->_getComposerCommand($composerPath);
+			}
+		} elseif ($composerPath) {
+			throw new Exception\InvalidComposerException('Composer path must be a string if set!');
 		}
 
 		$this->selfUpdate($composer);
 
-		chdir($path);
-		$shCommand = $composer . ' ' . $command . ($this->_debugMode === true ? ' --verbose' : '');
+		if ($installPath) {
+			$installPath = rtrim($installPath, '/');
+			if (!is_dir($installPath)) {
+				throw new Exception\InvalidComposerException('Could not install Mothership to `' . $installPath . '` as it does not exist!`');
+			}
+			chdir($installPath);
+		}
+
+		$shCommand = $composer . ' create-project ' . $package->getName() . ' ' . ($installPath ?: '.') . ' * ' . ($this->_debugMode === true ? ' --verbose' : '');
 
 		$this->_info->info('Running `' . $shCommand . '`, this may take a while');
-		if (in_array($command, $this->_createVendor)) {
-			$this->_info->info('Please note that Composer will show warnings until `mothership-ec\cog` has been installed. Do not worry about these messages');
-		}
+		$this->_info->info('Please note that Composer will show warnings until `mothership-ec\cog` has been installed. Do not worry about these messages, Composer has been set to create config files once Cog has been installed.');
+
 		ShellCommand::run($shCommand);
 
-		if (in_array($command, $this->_createVendor) && !is_dir($path . '/vendor')) {
-			throw new Exception\ComposerException('Composer could not create vendor directory', $this->_diagnose($path, $composer));
+		if (!is_dir(($installPath ? $installPath . '/' : '') . 'vendor')) {
+			throw new Exception\ComposerException('Composer could not create vendor directory', $this->_diagnose($composer));
 		}
 	}
 
@@ -132,14 +111,12 @@ class Runner
 	/**
 	 * Run Composer's diagnostics to debug any problems
 	 *
-	 * @param string $path           Path of installation
 	 * @param string $composer       Composer command
 	 *
 	 * @return mixed
 	 */
-	private function _diagnose($path, $composer)
+	private function _diagnose($composer)
 	{
-		chdir($path);
 		ShellCommand::exec($composer . ' diagnose', $output);
 
 		return $output;

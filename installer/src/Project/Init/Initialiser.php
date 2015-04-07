@@ -1,20 +1,20 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Init;
+namespace Mothership\Install\Project\Init;
 
-use Message\Mothership\Install\Bin\Runner as BinRunner;
-use Message\Mothership\Install\Project\Config\App\Config as AppConfig;
-use Message\Mothership\Install\Project\Config\Database\Config as DbConfig;
-use Message\Mothership\Install\Project\Config\Exception\ConfigException;
-use Message\Mothership\Install\Project\Database\Install as DbInstall;
-use Message\Mothership\Install\Output\QuestionOutput;
-use Message\Mothership\Install\Project\PostInstall\File\Collection as PostInstallFiles;
-use Message\Mothership\Install\FileSystem;
-use Message\Mothership\Install\Output\InfoOutput;
+use Mothership\Install\Bin\Runner as BinRunner;
+use Mothership\Install\Project\Config\App\Config as AppConfig;
+use Mothership\Install\Project\Config\Database\Config as DbConfig;
+use Mothership\Install\Project\Config\Exception\ConfigException;
+use Mothership\Install\Project\Database\Install as DbInstall;
+use Mothership\Install\Output\QuestionOutput;
+use Mothership\Install\Project\PostInstall\File\Collection as PostInstallFiles;
+use Mothership\Install\FileSystem;
+use Mothership\Install\Output\InfoOutput;
 
 /**
  * Class Initialiser
- * @package Message\Mothership\Install\Project\Init
+ * @package Mothership\Install\Project\Init
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
@@ -24,47 +24,42 @@ use Message\Mothership\Install\Output\InfoOutput;
 class Initialiser
 {
 	/**
-	 * @var \Message\Mothership\Install\Project\Config\App\Config
+	 * @var \Mothership\Install\Project\Config\App\Config
 	 */
 	private $_appConfig;
 
 	/**
-	 * @var \Message\Mothership\Install\Project\Config\Database\Config
+	 * @var \Mothership\Install\Project\Config\Database\Config
 	 */
 	private $_dbConfig;
 
 	/**
-	 * @var \Message\Mothership\Install\Project\Database\Install
+	 * @var \Mothership\Install\Project\Database\Install
 	 */
 	private $_dbInstall;
 
 	/**
-	 * @var \Message\Mothership\Install\Output\QuestionOutput
+	 * @var \Mothership\Install\Output\QuestionOutput
 	 */
 	private $_question;
 
 	/**
-	 * @var \Message\Mothership\Install\Bin\Runner
+	 * @var \Mothership\Install\Bin\Runner
 	 */
 	private $_binRunner;
 
 	/**
-	 * @var \Message\Mothership\Install\Project\PostInstall\File\Collection
-	 */
-	private $_postInstallFiles;
-
-	/**
-	 * @var \Message\Mothership\Install\FileSystem\DirectoryResolver
+	 * @var \Mothership\Install\FileSystem\DirectoryResolver
 	 */
 	private $_dirResolver;
 
 	/**
-	 * @var \Message\Mothership\Install\FileSystem\FileResolver
+	 * @var \Mothership\Install\FileSystem\FileResolver
 	 */
 	private $_fileResolver;
 
 	/**
-	 * @var \Message\Mothership\Install\Output\InfoOutput
+	 * @var \Mothership\Install\Output\InfoOutput
 	 */
 	private $_info;
 
@@ -75,7 +70,6 @@ class Initialiser
 		$this->_dbInstall        = new DbInstall;
 		$this->_question         = new QuestionOutput;
 		$this->_binRunner        = new BinRunner;
-		$this->_postInstallFiles = new PostInstallFiles;
 		$this->_dirResolver      = new FileSystem\DirectoryResolver;
 		$this->_fileResolver     = new FileSystem\FileResolver;
 		$this->_info             = new InfoOutput;
@@ -96,29 +90,18 @@ class Initialiser
 		$this->_dbInstall->install($path);
 
 		$this->_info->info('Copying assets into project, this might take a while');
+
 		$this->_binRunner->run($path, 'asset:dump');
 		$this->_binRunner->run($path, 'asset:generate');
 
-		$this->_createPostInstallFiles();
-
 		$this->_dirResolver->chmodR('public', 0777);
+		$this->_dirResolver->chmodR('tmp', 0777);
+		$this->_dirResolver->chmodR('logs', 0777);
+		$this->_dirResolver->chmodR('data', 0777);
 
 		$this->_binRunner->run($path, 'task:run user:create_admin');
 
 		$this->_info->heading('Initialisation complete! Navigate to `[your URL]/admin` in your browser to start adding content. Be sure to check out http://wiki.mothership.ec and http://forum.mothership.ec for more help with setting up your Mothership site!');
 	}
-
-	/**
-	 * Create files that exist in directories that were created during the installation setup
-	 */
-	private function _createPostInstallFiles()
-	{
-		foreach ($this->_postInstallFiles as $file) {
-			$directory = $this->_dirResolver->get($file->getPath());
-			$file      = new FileSystem\File($file->getFilename(), $file->getContents());
-			$this->_fileResolver->create($file, $directory);
-		}
-	}
-
 
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Config;
+namespace Mothership\Install\Project\Config;
 
 /**
  * Interface ConfigInterface
- * @package Message\Mothership\Install\Project\Config
+ * @package Mothership\Install\Project\Config
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
