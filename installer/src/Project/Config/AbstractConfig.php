@@ -57,9 +57,14 @@ abstract class AbstractConfig implements ConfigInterface
 	 */
 	public function setConfig($path, array $config)
 	{
-		$this->validateConfig($config);
+		try {
+			$this->validateConfig($config);
 
-		$yaml = Yaml::dump($config);
-		file_put_contents($this->_dirResolver->getAbsolute(rtrim($path, '/') . '/' . $this->getConfigPath()), $yaml);
+			$yaml = Yaml::dump($config);
+			file_put_contents($this->_dirResolver->getAbsolute(rtrim($path, '/') . '/' . $this->getConfigPath()), $yaml);
+		} catch (Exception\ConfigException $e) {
+			$this->_question->invalid($e->getMessage());
+			$this->askForDetails($path);
+		}
 	}
 }
