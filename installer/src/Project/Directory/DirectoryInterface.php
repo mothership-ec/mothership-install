@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Directory;
+namespace Mothership\Install\Project\Directory;
 
 /**
  * Interface DirectoryInterface
- * @package Message\Mothership\Install\Project\Directory
+ * @package Mothership\Install\Project\Directory
  *
  * Interface for directories to be created on installation
  */

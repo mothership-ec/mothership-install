@@ -1,13 +1,13 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Database;
+namespace Mothership\Install\Project\Database;
 
-use Message\Mothership\Install\Output\InfoOutput;
-use Message\Mothership\Install\Bin\Runner;
+use Mothership\Install\Output\InfoOutput;
+use Mothership\Install\Bin\Runner;
 
 /**
  * Class Install
- * @package Message\Mothership\Install\Project\Database
+ * @package Mothership\Install\Project\Database
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
@@ -16,12 +16,12 @@ use Message\Mothership\Install\Bin\Runner;
 class Install
 {
 	/**
-	 * @var \Message\Mothership\Install\Bin\Runner
+	 * @var \Mothership\Install\Bin\Runner
 	 */
 	private $_runner;
 
 	/**
-	 * @var \Message\Mothership\Install\Output\InfoOutput
+	 * @var \Mothership\Install\Output\InfoOutput
 	 */
 	private $_info;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\Bin;
+namespace Mothership\Install\Bin;
 
 /**
  * Class Paths
- * @package Message\Mothership\Install\Bin
+ * @package Mothership\Install\Bin
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

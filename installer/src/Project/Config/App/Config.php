@@ -1,13 +1,13 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Config\App;
+namespace Mothership\Install\Project\Config\App;
 
-use Message\Mothership\Install\Project\Config\AbstractConfig;
-use Message\Mothership\Install\Project\Config\Exception;
+use Mothership\Install\Project\Config\AbstractConfig;
+use Mothership\Install\Project\Config\Exception;
 
 /**
  * Class Config
- * @package Message\Mothership\Install\Project\Config\App
+ * @package Mothership\Install\Project\Config\App
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

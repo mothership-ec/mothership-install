@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\Bin\Exception;
+namespace Mothership\Install\Bin\Exception;
 
 /**
  * Class NotFoundException
- * @package Message\Mothership\Install\Bin\Exception
+ * @package Mothership\Install\Bin\Exception
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

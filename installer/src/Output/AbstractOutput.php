@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\Output;
+namespace Mothership\Install\Output;
 
 /**
  * Class AbstractOutput
- * @package Message\Mothership\Install\Output
+ * @package Mothership\Install\Output
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

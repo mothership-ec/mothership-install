@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\System\Exception;
+namespace Mothership\Install\System\Exception;
 
 /**
  * Class CompatibilityException
- * @package Message\Mothership\Install\System\Exception
+ * @package Mothership\Install\System\Exception
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

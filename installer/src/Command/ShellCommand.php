@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\Command;
+namespace Mothership\Install\Command;
 
 /**
  * Class ShellCommand
- * @package Message\Mothership\Install\Command
+ * @package Mothership\Install\Command
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\Output\Exception;
+namespace Mothership\Install\Output\Exception;
 
 /**
  * Class OutputException
- * @package Message\Mothership\Install\Output\Exception
+ * @package Mothership\Install\Output\Exception
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *

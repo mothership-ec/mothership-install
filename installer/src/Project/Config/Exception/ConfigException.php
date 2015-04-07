@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\Install\Project\Config\Exception;
+namespace Mothership\Install\Project\Config\Exception;
 
 /**
  * Class ConfigException
- * @package Message\Mothership\Install\Project\Config\Exception
+ * @package Mothership\Install\Project\Config\Exception
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  *
