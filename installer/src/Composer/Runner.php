@@ -77,8 +77,8 @@ class Runner
 		if (is_string($composerPath)) {
 			$composerPath = rtrim($composerPath, '/');
 
-			if (!is_dir($composerPath)) {
-				throw new Exception\InvalidComposerException('Could not change directory to `' . $composerPath . '` as it does not exist!');
+			if (!file_exists($composerPath)) {
+				throw new Exception\InvalidComposerException('File ' . $composerPath . ' does not exist!');
 			}
 
 			$composer = $this->_getComposerCommand($composerPath);
@@ -128,12 +128,16 @@ class Runner
 	 */
 	private function _getComposerCommand($composerPath)
 	{
-		if (!preg_match('/\/.*\/(bin\/composer|composer\.phar)?$/', $composerPath)) {
+		$fromSource = preg_match('/\/.*\/bin\/composer$/', $composerPath);
+
+		if (!$fromSource && !preg_match('/\/.*\/composer\.phar$/', $composerPath)) {
 			throw new Exception\InvalidComposerException('`' . $composerPath . '` is not a valid Composer installation');
-		} elseif (!file_exists($composerPath)) {
+		}
+
+		if (!file_exists($composerPath)) {
 			throw new Exception\InvalidComposerException('`' . $composerPath . '` does not exist!');
 		}
 
-		return 'php ' . $composerPath;
+		return ($fromSource ? '' : 'php ') . $composerPath;
 	}
 }
