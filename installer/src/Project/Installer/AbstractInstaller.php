@@ -60,7 +60,6 @@ abstract class AbstractInstaller implements InstallerInterface
 	public function install(array $options)
 	{
 		$this->_options = $options;
-		$this->_composer->debug(!empty($this->_options[OptionParser::DEBUG]));
 
 		$path = array_key_exists(OptionParser::PATH, $this->_options) ?
 			$this->_options[OptionParser::PATH] : $this->_dirResolver->current();

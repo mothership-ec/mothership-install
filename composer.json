@@ -24,6 +24,7 @@
 	},
 	"require": {
 		"php": ">=5.4.0",
+	  	"mothership-ec/up": "~1.0@alpha",
 		"symfony/yaml": "~2.5",
 		"kevinlebrun/colors.php": "0.*"
 	},
