@@ -51,7 +51,7 @@ require 'phar://mothership.phar/cli.php';
 
 __HALT_COMPILER();
 EOF;
-	// $phar->setStub("#!/usr/bin/env php" . PHP_EOL . $phar->createDefaultStub($cliFile));
+
 	$phar->setStub($stub);
 
 	$phar->buildFromDirectory(__DIR__ . '/' . $source);
