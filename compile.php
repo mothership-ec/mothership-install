@@ -20,7 +20,6 @@ try {
 	$phar = new \Phar($build . '/' . $pharFile, 0, 'mothership.phar');
     $phar->setSignatureAlgorithm(\Phar::SHA1);
     $phar->startBuffering();
-	// $phar = new \Phar($build . '/' . $pharFile, \FilesystemIterator::CURRENT_AS_FILEINFO | \FilesystemIterator::KEY_AS_FILENAME, $pharFile);
 
 	$cli = file_get_contents($source . '/' . $cliFile);
 
