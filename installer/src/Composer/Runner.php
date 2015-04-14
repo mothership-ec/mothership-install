@@ -41,7 +41,7 @@ class Runner
 	 * @param Package\PackageInterface $package         The package to install from Packagist
 	 * @param string | null $installPath                The path in which the project will be installed. If null,
 	 *                                                  defaults to current path
-	 * @param string | null $composerPath               The path to the Composer installation. If null, the installer will us Up
+	 * @param string | null $composerPath               The path to the Composer installation. If null, the installer will use Up
 	 *                                                  to download Mothership
 	 *
 	 * @throws Exception\InvalidComposerException
@@ -50,11 +50,11 @@ class Runner
 	public function createProject(Package\PackageInterface $package, $installPath = null, $composerPath = null)
 	{
 		$installPath = $this->_getInstallPath($installPath);
-		chdir($installPath);
 
 		$this->_info->info('Downloading Mothership, this may take a while');
 
 		if (null !== $composerPath) {
+			chdir($installPath);
 			$this->_createProjectFromCustomPath($package, $installPath, $composerPath);
 		} else {
 			$this->_up->setBaseDir($installPath)->createProject($package->getName());
