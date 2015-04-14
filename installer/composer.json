@@ -1,0 +1,33 @@
+{
+	"name": "mothership-ec/mothership-install",
+	"description": "Installation tool for setting up new Mothership sites",
+	"keywords": ["mothership", "installer", "install", "cog"],
+	"homepage": "http://mothership.ec",
+	"license": "GPL-3.0+",
+	"authors": [
+		{
+			"name" : "The Mothership Development Team",
+			"email": "dev@mothership.ec"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/mothership-ec/mothership-install/issues"
+	},
+	"autoload": {
+		"psr-4": {
+			"Mothership\\Install\\"      : "installer/src",
+			"Mothership\\Install\\Test\\": "tests"
+		}
+	},
+	"config": {
+		"vendor-dir": "installer/vendor"
+	},
+	"require": {
+		"php": ">=5.4.0",
+	  	"mothership-ec/up": "~1.0@alpha",
+		"symfony/yaml": "~2.5",
+		"kevinlebrun/colors.php": "0.*"
+	},
+	"suggest": {
+	}
+}
