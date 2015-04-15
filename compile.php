@@ -12,12 +12,14 @@ try {
 	$build = 'build';
 	$pharFile = 'mothership.phar';
 
-	if (file_exists($build . '/' . $pharFile)) {
-		echo __DIR__ . '/' . $build . '/' . $pharFile . ' already exists, deleting to rebuild' . PHP_EOL;
-		unlink($build . '/' . $pharFile);
+	$fullPath = $build . '/' . $pharFile;
+
+	if (file_exists($fullPath)) {
+		echo __DIR__ . '/' . $fullPath . ' already exists, deleting to rebuild' . PHP_EOL;
+		unlink($fullPath);
 	}
 
-	$phar = new \Phar($build . '/' . $pharFile, 0, 'mothership.phar');
+	$phar = new \Phar($fullPath, 0, 'mothership.phar');
     $phar->setSignatureAlgorithm(\Phar::SHA1);
     $phar->startBuffering();
 
@@ -57,6 +59,7 @@ EOF;
 	$phar->buildFromDirectory(__DIR__ . '/' . $source);
 	$phar->stopBuffering();
 
+	chmod($fullPath, 0775);
 } catch (\Exception $e) {
 	echo $e->getMessage() . PHP_EOL;
 	echo $e->getTraceAsString() . PHP_EOL;
