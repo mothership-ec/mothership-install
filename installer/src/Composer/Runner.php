@@ -119,7 +119,7 @@ class Runner
 	}
 
 	/**
-	 * Get PHP command to run Composer, if Composer is not globally installed
+	 * Get command to run Composer, depending on whether it path is to source code or .phar file
 	 *
 	 * @param string $composerPath      Absolute path to Composer installation (or bin/composer if run from source)
 	 * @throws \LogicException
