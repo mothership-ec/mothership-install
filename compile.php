@@ -20,8 +20,8 @@ try {
 	}
 
 	$phar = new \Phar($fullPath, 0, 'mothership.phar');
-    $phar->setSignatureAlgorithm(\Phar::SHA1);
-    $phar->startBuffering();
+	$phar->setSignatureAlgorithm(\Phar::SHA1);
+	$phar->startBuffering();
 
 	$cli = file_get_contents($source . '/' . $cliFile);
 
