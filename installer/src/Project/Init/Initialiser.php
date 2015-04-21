@@ -63,6 +63,13 @@ class Initialiser
 	 */
 	private $_info;
 
+	private $_writableDirs = [
+		'public',
+		'tmp',
+		'logs',
+		'data',
+	];
+
 	public function __construct()
 	{
 		$this->_appConfig        = new AppConfig;
@@ -94,10 +101,12 @@ class Initialiser
 		$this->_binRunner->run($path, 'asset:dump');
 		$this->_binRunner->run($path, 'asset:generate');
 
-		$this->_dirResolver->chmodR('public', 0777);
-		$this->_dirResolver->chmodR('tmp', 0777);
-		$this->_dirResolver->chmodR('logs', 0777);
-		$this->_dirResolver->chmodR('data', 0777);
+		foreach ($this->_writableDirs as $dir) {
+			if (!$this->_dirResolver->exists(rtrim($path, '/') . '/' . $dir)) {
+				$this->_dirResolver->create(rtrim($path, '/') . '/' . $dir);
+			}
+			$this->_dirResolver->chmodR(rtrim($path, '/') . '/' . $dir, 0777);
+		}
 
 		$this->_binRunner->run($path, 'task:run user:create_admin');
 

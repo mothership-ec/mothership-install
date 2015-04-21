@@ -78,6 +78,8 @@ class DirectoryResolver
 	 */
 	public function create($path, $permission = 0777, $recursive = true)
 	{
+		$path = $this->getAbsolute($path);
+
 		if (!is_string($path)) {
 			throw new \InvalidArgumentException('Path must be a string, ' . gettype($path) . ' given');
 		}
@@ -87,8 +89,12 @@ class DirectoryResolver
 		}
 
 		$oldUmask = umask(0);
-		mkdir($this->getAbsolute($path), $permission, (bool) $recursive);
+		$mkdir = mkdir($path, $permission, (bool) $recursive);
 		umask($oldUmask);
+
+		if (!$mkdir) {
+			throw new Exception\DirectoryNotExistsException('Could not create directory at `' . $path);
+		}
 
 		return new Directory($path, $permission);
 	}

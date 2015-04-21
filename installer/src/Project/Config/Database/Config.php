@@ -5,6 +5,7 @@ namespace Mothership\Install\Project\Config\Database;
 use Mothership\Install\Exception\InstallFailedException;
 use Mothership\Install\Project\Config\Exception;
 use Mothership\Install\Project\Config\AbstractConfig;
+use Mothership\Install\Project\Config\AskerInterface;
 
 /**
  * Class Config
@@ -14,7 +15,7 @@ use Mothership\Install\Project\Config\AbstractConfig;
  *
  * Class for setting the database configuration for the installation
  */
-class Config extends AbstractConfig
+class Config extends AbstractConfig implements AskerInterface
 {
 	const CONFIG_PATH = 'config/db.yml';
 

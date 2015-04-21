@@ -4,8 +4,6 @@ namespace Mothership\Install\Project\Installer;
 
 use Mothership\Install\FileSystem;
 use Mothership\Install\Command\OptionParser;
-use Mothership\Install\Project\Theme\Downloader as ThemeDownloader;
-use Mothership\Install\Project\RootFile\Collection as RootFileCollection;
 use Mothership\Install\Project\Directory\Collection as DirectoryCollection;
 use Mothership\Install\Composer\Runner as ComposerRunner;
 use Mothership\Install\Output\InfoOutput;
@@ -31,11 +29,6 @@ abstract class AbstractInstaller implements InstallerInterface
 	private $_fileResolver;
 
 	/**
-	 * @var \Mothership\Install\Project\Directory\Collection
-	 */
-	private $_directories;
-
-	/**
 	 * @var \Mothership\Install\Composer\Runner
 	 */
 	private $_composer;
@@ -49,7 +42,6 @@ abstract class AbstractInstaller implements InstallerInterface
 	{
 		$this->_dirResolver     = new FileSystem\DirectoryResolver;
 		$this->_fileResolver    = new FileSystem\FileResolver;
-		$this->_directories     = new DirectoryCollection;
 		$this->_composer        = new ComposerRunner;
 		$this->_info            = new InfoOutput;
 	}
@@ -60,13 +52,16 @@ abstract class AbstractInstaller implements InstallerInterface
 	public function install(array $options)
 	{
 		$this->_options = $options;
-		$this->_composer->debug(!empty($this->_options[OptionParser::DEBUG]));
 
 		$path = array_key_exists(OptionParser::PATH, $this->_options) ?
 			$this->_options[OptionParser::PATH] : $this->_dirResolver->current();
 		$path = $this->_dirResolver->getAbsolute($path);
 
-		$this->_info->heading('Installing a Mothership to ' . $path);
+		$this->_info->heading('Installing Mothership to ' . $path);
+
+		if (!is_dir($path)) {
+			$this->_dirResolver->create($path);
+		}
 
 		// If composer path is set in options, use that, otherwise default to global installation
 		$composerPath = !empty($options[OptionParser::COMPOSER]) ? $this->_dirResolver->getAbsolute($options[OptionParser::COMPOSER]) : null;

@@ -3,6 +3,7 @@
 namespace Mothership\Install\Project\Config\App;
 
 use Mothership\Install\Project\Config\AbstractConfig;
+use Mothership\Install\Project\Config\AskerInterface;
 use Mothership\Install\Project\Config\Exception;
 
 /**
@@ -13,7 +14,7 @@ use Mothership\Install\Project\Config\Exception;
  *
  * Class for setting the application configuration for the installation
  */
-class Config extends AbstractConfig
+class Config extends AbstractConfig implements AskerInterface
 {
 	const CONFIG_PATH = 'config/app.yml';
 

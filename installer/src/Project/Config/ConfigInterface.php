@@ -37,13 +37,6 @@ interface ConfigInterface
 	public function setConfig($path, array $config);
 
 	/**
-	 * Ask the user to input config details, and commit them to the config file
-	 *
-	 * @param $path
-	 */
-	public function askForDetails($path);
-
-	/**
 	 * Check that all the required fields exist in the config data
 	 *
 	 * @param array $config
