@@ -193,16 +193,16 @@
         },
         {
             "name": "mothership-ec/up",
-            "version": "1.0.6-alpha",
+            "version": "1.0.7-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mothership-ec/up.git",
-                "reference": "91199051e3fd258f2f27cfe146afa5402981656d"
+                "reference": "909d0207a3ce48b4196294cc365276470660702d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mothership-ec/up/zipball/91199051e3fd258f2f27cfe146afa5402981656d",
-                "reference": "91199051e3fd258f2f27cfe146afa5402981656d",
+                "url": "https://api.github.com/repos/mothership-ec/up/zipball/909d0207a3ce48b4196294cc365276470660702d",
+                "reference": "909d0207a3ce48b4196294cc365276470660702d",
                 "shasum": ""
             },
             "require": {
@@ -232,7 +232,7 @@
                 "installer",
                 "update"
             ],
-            "time": "2015-04-21 08:42:47"
+            "time": "2015-04-21 11:08:49"
         },
         {
             "name": "seld/jsonlint",
