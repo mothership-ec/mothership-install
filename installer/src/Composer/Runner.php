@@ -53,11 +53,11 @@ class Runner
 
 		$this->_info->info('Downloading Mothership, this may take a while');
 
+		chdir($installPath);
 		if (null !== $composerPath) {
-			chdir($installPath);
 			$this->_createProjectFromCustomPath($package, $installPath, $composerPath);
 		} else {
-			$this->_up->setBaseDir($installPath)->createProject($package->getName());
+			$this->_up->setBaseDir($installPath)->createProject($package->getName())->update();
 		}
 
 		if (!is_dir($installPath . '/' . 'vendor')) {
@@ -87,9 +87,12 @@ class Runner
 		}
 
 		$shCommand = $composer . ' create-project ' . $package->getName() . ' ' . $installPath . ' *';
+		$upCommand = $composer . ' update';
 
 		$this->_info->info('Running `' . $shCommand . '`, this may take a while');
+		ShellCommand::run($shCommand);
 
+		$this->_info->info('Running `' . $upCommand . '`');
 		ShellCommand::run($shCommand);
 	}
 
