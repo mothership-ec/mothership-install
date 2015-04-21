@@ -29,7 +29,7 @@ class ExceptionOutput extends AbstractOutput
 	{
 		$this->_addExceptionLines();
 		$this->_addLine('Stack trace:', 'black', 'red');
-		$this->_addLines($this->_getCompressedTrace(), 'red', 'dark_gray');
+		$this->_addLines($this->_getCompressedTrace(), 'red', 'white');
 		$this->_output();
 	}
 
@@ -65,7 +65,15 @@ class ExceptionOutput extends AbstractOutput
 		$compressed = [];
 
 		foreach ($this->_exception->getTrace() as $line) {
-			$compressed[] = is_array($line) ? implode(':', $line) : $line;
+			if (!is_array($line)) {
+				$compressed[] = $line;
+			} else {
+				foreach ($line as $l) {
+					if (!is_array($l)) {
+						$compressed[] = (string) $l;
+					}
+				}
+			}
 		}
 
 		return $compressed;

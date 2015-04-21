@@ -12,7 +12,7 @@ use Mothership\Install\Exception\OutputException;
  *
  * Exception for flagging errors with the Composer installation
  */
-class ComposerException extends OutputException
+class ComposerException extends \LogicException
 {
 
 }
