@@ -57,7 +57,7 @@ abstract class AbstractInstaller implements InstallerInterface
 			$this->_options[OptionParser::PATH] : $this->_dirResolver->current();
 		$path = $this->_dirResolver->getAbsolute($path);
 
-		$this->_info->heading('Installing a Mothership to ' . $path);
+		$this->_info->heading('Installing Mothership to ' . $path);
 
 		if (!is_dir($path)) {
 			$this->_dirResolver->create($path);

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6823e43dd4c7cfce54af4e450d3bf924",
+    "hash": "f441ca80cb4299ad4ca6051d96ff8639",
     "packages": [
         {
             "name": "justinrainbow/json-schema",
@@ -193,16 +193,16 @@
         },
         {
             "name": "mothership-ec/up",
-            "version": "1.0.8-alpha",
+            "version": "1.0.0-beta",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mothership-ec/up.git",
-                "reference": "75898cc22d22ca48d32b1be6d60534fdc805eba5"
+                "reference": "e99b65612a2102890ed059dba87b0eec1efa30dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mothership-ec/up/zipball/75898cc22d22ca48d32b1be6d60534fdc805eba5",
-                "reference": "75898cc22d22ca48d32b1be6d60534fdc805eba5",
+                "url": "https://api.github.com/repos/mothership-ec/up/zipball/e99b65612a2102890ed059dba87b0eec1efa30dc",
+                "reference": "e99b65612a2102890ed059dba87b0eec1efa30dc",
                 "shasum": ""
             },
             "require": {
@@ -219,6 +219,9 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
             "authors": [
                 {
                     "name": "The Mothership Development Team",
@@ -232,7 +235,7 @@
                 "installer",
                 "update"
             ],
-            "time": "2015-04-21 13:20:40"
+            "time": "2015-04-21 13:46:48"
         },
         {
             "name": "seld/jsonlint",
@@ -493,7 +496,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "mothership-ec/up": 15
+        "mothership-ec/up": 10
     },
     "prefer-stable": false,
     "prefer-lowest": false,
