@@ -94,7 +94,7 @@ class Config extends AbstractConfig implements AskerInterface
 			throw new InstallFailedException('Install aborted, an error was thrown. Message: ' . $e->getMessage());
 		}
 
-		if ($pdo->query("SHOW TABLES IN " . $dbConfig[self::NAME])->rowCount() > 0) {
+		if ($pdo->query("SHOW TABLES IN `" . $dbConfig[self::NAME] . "`")->rowCount() > 0) {
 			throw new InstallFailedException('Database schema must be empty!');
 		}
 	}
