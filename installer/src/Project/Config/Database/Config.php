@@ -84,6 +84,10 @@ class Config extends AbstractConfig implements AskerInterface
 			}
 		}
 
+		if (preg_match('/[\/\\.;`\'"\s]/', $dbConfig[self::NAME])) {
+			throw new Exception\ConfigException('Database name `' . $dbConfig[self::NAME] . '` contains invalid characters');
+		}
+
 		$mysqlConn = 'mysql:host=' . $dbConfig[self::HOST] . ';dbname=' . $dbConfig[self::NAME];
 
 		try {
