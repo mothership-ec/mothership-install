@@ -35,10 +35,12 @@ class Config extends AbstractConfig implements AskerInterface
 		self::CHARSET,
 	];
 
-	// Config options to bypass
-	private $_blacklist = [
-		self::CHARSET,
-		self::CACHE,
+	// Config options to ask the user to fill in
+	private $_toAsk = [
+		self::HOST,
+		self::USER,
+		self::PASS,
+		self::NAME,
 	];
 
 	/**
@@ -61,7 +63,7 @@ class Config extends AbstractConfig implements AskerInterface
 		while ($asking) {
 			$this->_question->ask("Please enter your database details:");
 			foreach ($dbConfig as $key => $value) {
-				if (in_array($key, $this->_blacklist, true)) {
+				if (!in_array($key, $this->_toAsk, true)) {
 					continue;
 				}
 				$this->_question->option($key . ' (defaults to `' . $value . '`):');
