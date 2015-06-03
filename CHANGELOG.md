@@ -1,5 +1,10 @@
 # Change log
 
+## 0.2.1
+
+- Validate characters in schema name when entering database details
+- Wrap database name in backticks when checking if database schema is empty
+
 ## 0.2.0
 
 - Use <a href="http://github.com/mothership-ec/up">Up!</a> as a dependency instead of the user having a Composer requirement
