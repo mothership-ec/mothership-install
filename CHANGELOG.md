@@ -4,6 +4,7 @@
 
 - Validate characters in schema name when entering database details
 - Wrap database name in backticks when checking if database schema is empty
+- Database config settings asked from a set list rather than merely looping through options in db.yml config
 
 ## 0.2.0
 
