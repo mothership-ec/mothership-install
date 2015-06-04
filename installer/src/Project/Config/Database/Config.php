@@ -19,17 +19,28 @@ class Config extends AbstractConfig implements AskerInterface
 {
 	const CONFIG_PATH = 'config/db.yml';
 
+	// Constants for config names
 	const HOST    = 'hostname';
 	const USER    = 'user';
 	const PASS    = 'pass';
 	const NAME    = 'name';
+	const CACHE   = 'cache';
 	const CHARSET = 'charset';
 
+	// Required options
 	private $_required = [
 		self::HOST,
 		self::USER,
 		self::NAME,
 		self::CHARSET,
+	];
+
+	// Config options to ask the user to fill in
+	private $_toAsk = [
+		self::HOST,
+		self::USER,
+		self::PASS,
+		self::NAME,
 	];
 
 	/**
@@ -52,7 +63,7 @@ class Config extends AbstractConfig implements AskerInterface
 		while ($asking) {
 			$this->_question->ask("Please enter your database details:");
 			foreach ($dbConfig as $key => $value) {
-				if ($key === self::CHARSET) {
+				if (!in_array($key, $this->_toAsk, true)) {
 					continue;
 				}
 				$this->_question->option($key . ' (defaults to `' . $value . '`):');
@@ -84,6 +95,10 @@ class Config extends AbstractConfig implements AskerInterface
 			}
 		}
 
+		if (preg_match('/[\/\\.;`\'"\s]/', $dbConfig[self::NAME])) {
+			throw new Exception\ConfigException('Database name `' . $dbConfig[self::NAME] . '` contains invalid characters');
+		}
+
 		$mysqlConn = 'mysql:host=' . $dbConfig[self::HOST] . ';dbname=' . $dbConfig[self::NAME];
 
 		try {
@@ -94,7 +109,7 @@ class Config extends AbstractConfig implements AskerInterface
 			throw new InstallFailedException('Install aborted, an error was thrown. Message: ' . $e->getMessage());
 		}
 
-		if ($pdo->query("SHOW TABLES IN " . $dbConfig[self::NAME])->rowCount() > 0) {
+		if ($pdo->query("SHOW TABLES IN `" . $dbConfig[self::NAME] . "`")->rowCount() > 0) {
 			throw new InstallFailedException('Database schema must be empty!');
 		}
 	}
