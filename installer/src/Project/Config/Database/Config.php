@@ -19,17 +19,28 @@ class Config extends AbstractConfig implements AskerInterface
 {
 	const CONFIG_PATH = 'config/db.yml';
 
+	// Constants for config names
 	const HOST    = 'hostname';
 	const USER    = 'user';
 	const PASS    = 'pass';
 	const NAME    = 'name';
+	const CACHE   = 'cache';
 	const CHARSET = 'charset';
 
+	// Required options
 	private $_required = [
 		self::HOST,
 		self::USER,
 		self::NAME,
 		self::CHARSET,
+	];
+
+	// Config options to ask the user to fill in
+	private $_toAsk = [
+		self::HOST,
+		self::USER,
+		self::PASS,
+		self::NAME,
 	];
 
 	/**
@@ -52,7 +63,7 @@ class Config extends AbstractConfig implements AskerInterface
 		while ($asking) {
 			$this->_question->ask("Please enter your database details:");
 			foreach ($dbConfig as $key => $value) {
-				if ($key === self::CHARSET) {
+				if (!in_array($key, $this->_toAsk, true)) {
 					continue;
 				}
 				$this->_question->option($key . ' (defaults to `' . $value . '`):');
